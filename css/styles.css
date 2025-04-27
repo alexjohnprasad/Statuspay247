@@ -23,6 +23,7 @@ body {
     background-color: var(--background-color);
     line-height: 1.7;
     overflow-x: hidden;
+    padding-top: 80px; /* Add padding to account for the fixed header */
 }
 
 .container {
@@ -89,6 +90,7 @@ header {
     left: 0;
     width: 100%;
     z-index: 1000;
+    height: 80px; /* Set a fixed height for the header */
 }
 
 nav {
@@ -308,6 +310,37 @@ section {
     justify-content: center;
     gap: 0.5rem;
     min-height: 2.5rem;
+}
+
+/* Clients Section */
+.clients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.client-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.client-card:hover {
+    transform: translateY(-5px);
+}
+
+.client-card img {
+    max-width: 100%;
+    max-height: 80px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
 
 /* Why Choose Us Section */
