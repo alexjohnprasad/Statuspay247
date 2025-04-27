@@ -112,6 +112,7 @@ nav {
     color: var(--accent-color);
 }
 
+/* Navigation Menu */
 nav ul {
     display: flex;
     list-style: none;
@@ -166,6 +167,48 @@ nav a:hover:after {
 
 .btn-secondary:hover {
     background-color: #0D9668;
+}
+
+/* Burger Menu */
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.burger-menu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.burger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 4px 0;
+    transition: all 0.3s ease;
+}
+
+.burger-menu.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.burger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Hero Section */
@@ -365,6 +408,35 @@ section {
     justify-content: center; /* Center content vertically */
 }
 
+/* Who Can Join Section */
+#who-can-join .section-content {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+#who-can-join .section-content > div:first-child {
+    flex: 1;
+    padding: 1rem;
+}
+
+#who-can-join .section-content > div:last-child {
+    flex: 1;
+    background-color: var(--background-light);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+#who-can-join .section-content h3 {
+    margin-bottom: 1rem;
+}
+
+#who-can-join .section-content a.btn {
+    display: inline-block;
+    margin-top: 1rem;
+}
+
 /* Contact Section */
 #contact {
     background-color: var(--background-light);
@@ -383,6 +455,66 @@ section {
 .contact-info .hero-buttons {
     justify-content: center;
     margin-top: 2rem;
+}
+
+/* Forms */
+.form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--background-light);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.form-group input[name="state"],
+.form-group input[name="country"] {
+    background-color: var(--background-light);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.form-group input[name="state"]:focus,
+.form-group input[name="country"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Honeypot Field */
+.contact-field-hp {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
 }
 
 /* Footer */
@@ -500,13 +632,55 @@ footer {
         max-width: 100%;
     }
     
+    .burger-menu {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+    }
+
     nav ul {
         display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: var(--background-color);
+        box-shadow: var(--shadow);
+        z-index: 1000;
     }
-    
+
+    nav ul.active {
+        display: flex;
+        flex-direction: column;
+    }
+
+    nav ul li {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    nav ul li:last-child {
+        border-bottom: none;
+    }
+
     .features-grid,
     .benefits-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 769px) {
+    nav ul {
+        display: flex !important;
+        position: static;
+        box-shadow: none;
+    }
+
+    .burger-menu {
+        display: none;
     }
 }
 
@@ -523,5 +697,12 @@ footer {
     .hero-buttons {
         flex-direction: column;
         width: 100%;
+    }
+}
+
+/* Ensure the navigation menu is visible on desktop */
+@media (min-width: 768px) {
+    nav ul {
+        display: flex !important;
     }
 }

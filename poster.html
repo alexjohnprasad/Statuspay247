@@ -9,18 +9,26 @@
     <title>Join as Poster - StatusPay 247</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="js/main.js" defer></script>
 </head>
 <body>
     <header>
         <div class="container">
             <nav>
                 <div class="logo">Status<span>Pay</span> 247</div>
+                <div class="burger-menu" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 <ul>
                     <li><a href="index.html#hero">Home</a></li>
                     <li><a href="index.html#what-is-statuspay">About</a></li>
                     <li><a href="index.html#how-it-works">How It Works</a></li>
                     <li><a href="index.html#why-choose-us">Why Choose Us</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="poster.html">Join as Poster</a></li>
+                    <li><a href="advertisers.html">Advertisers</a></li>
                 </ul>
             </nav>
         </div>
@@ -35,90 +43,94 @@
                 <div class="section-content">
                     <p>Fill out the form below to join StatusPay 247 as a poster and start earning by sharing WhatsApp status ads.</p>
                 </div>
-                <form id="posterForm" class="form" style="max-width: 600px; margin: 0 auto; padding: 2rem; background-color: var(--background-light); border-radius: 10px; box-shadow: var(--shadow);">
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="name" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your full name" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem;">
+                <form id="posterForm" class="form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required value="Priya Sharma">
                     </div>
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="email" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="Enter your email address" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem;">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address" required value="priya.sharma@example.com">
                     </div>
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="whatsapp" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">WhatsApp Number</label>
-                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="Enter your WhatsApp number" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem;">
+                    <div class="form-group">
+                        <label for="whatsapp">WhatsApp Number</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="Enter your WhatsApp number" required value="9876543210">
                     </div>
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="street" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Street Address</label>
-                        <input type="text" id="street" name="street" placeholder="Enter your street address" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem;">
+                    <div class="form-group">
+                        <label for="street">Street Address</label>
+                        <input type="text" id="street" name="street" placeholder="Enter your street address" required value="123 MG Road">
                     </div>
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="city" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">City</label>
-                        <input type="text" id="city" name="city" placeholder="Enter your city" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem;">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="Enter your city" required value="Mumbai">
                     </div>
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="postal-code" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Postal Code</label>
-                        <input type="text" id="pincode" name="postal-code" placeholder="Enter your postal code" required pattern="\d{6}" title="Please enter a valid 6-digit postal code" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem;" oninput="getLocation()">
+                    <div class="form-group">
+                        <label for="postal-code">Postal Code</label>
+                        <input type="text" id="pincode" name="postal-code" placeholder="Enter your postal code" required pattern="\d{6}" title="Please enter a valid 6-digit postal code" oninput="getLocation()" value="400001">
                     </div>
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="state" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">State</label>
-                        <span id="state" style="display: block; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem; background-color: #f9f9f9;">-</span>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" required value="Maharashtra">
                     </div>
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="country" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Country</label>
-                        <span id="country" style="display: block; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem; background-color: #f9f9f9;">-</span>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" required value="India">
                     </div>
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label for="id-proof" style="display: block; font-weight: 600; margin-bottom: 0.5rem;">Upload ID Proof</label>
-                        <input type="file" id="id-proof" name="id-proof" accept=".jpg,.jpeg,.png,.pdf" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 5px; font-size: 1rem;">
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob" required value="1990-01-15">
                     </div>
-                    <!-- Hidden Honeypot Field -->
-                    <input type="text" name="honeypot" style="display: none;">
-                    <button type="submit" class="btn" style="width: 100%; padding: 0.75rem; font-size: 1rem;">Submit</button>
+                    <!-- Honeypot field -->
+                    <div class="form-group contact-field-hp" aria-hidden="true">
+                        <label for="contact-email">Email</label>
+                        <input type="text" id="contact-email" name="contact-email" autocomplete="off" tabindex="-1">
+                    </div>
+                    <button type="submit" class="btn">Submit</button>
                 </form>
-                <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+                <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
                 <script>
                     (function() {
-                        emailjs.init("your_user_id"); // Replace with your EmailJS user ID
+                        emailjs.init({
+                            publicKey: "sOAeJekMKKXvYtpfo",
+                            blockHeadless: true,
+                            limitRate: {
+                                id: 'posterForm',
+                                throttle: 5000
+                            }
+                        });
                     })();
-
-                    let lastSubmitTime = 0;
 
                     document.getElementById("posterForm").addEventListener("submit", function(event) {
                         event.preventDefault();
-
-                        // Check honeypot field
-                        if (document.getElementsByName("honeypot")[0].value) {
-                            console.log("Spam detected! Form submission blocked.");
-                            alert("Spam detected! Form submission blocked.");
-                            return; // Block form submission
-                        }
-
-                        const currentTime = new Date().getTime();
-
-                        // Block form submission if the time difference between submissions is too short
-                        if (currentTime - lastSubmitTime < 5000) { // 5 seconds between submissions
-                            alert("You are submitting too quickly. Please wait a moment.");
+                        
+                        const honeypot = document.getElementById("contact-email");
+                        if (honeypot && honeypot.value.length > 0) {
+                            console.log("Potential spam detected");
+                            alert("Form submitted successfully!");
                             return;
                         }
 
-                        lastSubmitTime = currentTime;
+                        const submitButton = event.target.querySelector('button[type="submit"]');
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Sending...';
 
-                        emailjs.send("service_ssbh7pp", "your_template_id", {
-                            to_email: "statuspay247@gmail.com", // Email recipient
-                            name: document.getElementById("name").value,
-                            email: document.getElementById("email").value,
-                            whatsapp: document.getElementById("whatsapp").value,
-                            street: document.getElementById("street").value,
-                            city: document.getElementById("city").value,
-                            postal_code: document.getElementById("pincode").value,
-                            state: document.getElementById("state").textContent,
-                            country: document.getElementById("country").textContent
-                        }).then(function() {
-                            alert("Form submitted successfully!");
-                        }, function(error) {
-                            alert("Failed to send form. Please try again.");
-                            console.error("Error:", error);
+                        emailjs.sendForm(
+                            "service_ssbh7pp",
+                            "template_jqkiw9f",
+                            event.target
+                        ).then(
+                            function(response) {
+                                console.log("SUCCESS", response);
+                                alert("Form submitted successfully!");
+                                event.target.reset();
+                            },
+                            function(error) {
+                                console.error("FAILED", error);
+                                alert("Failed to send form. Please try again later.");
+                            }
+                        ).finally(() => {
+                            submitButton.disabled = false;
+                            submitButton.textContent = 'Submit';
                         });
                     });
                 </script>
@@ -163,6 +175,7 @@
     <script>
         function getLocation() {
             const pinCode = document.getElementById("pincode").value;
+            const currentPin = document.getElementById("pincode").value;
 
             if (pinCode.length >= 3) {
                 const apiUrl = `https://api.zippopotam.us/in/${pinCode}`;
@@ -179,21 +192,17 @@
                             const state = data.places[0]['state'] || "Unknown";
                             const country = data['country'] || "Unknown";
 
-                            document.getElementById("state").textContent = state;
-                            document.getElementById("country").textContent = country;
-                        } else {
-                            document.getElementById("state").textContent = "Invalid pin code";
-                            document.getElementById("country").textContent = "-";
+                            // Only suggest values, keep current postal code
+                            document.getElementById("pincode").value = currentPin;
+                            document.getElementById("state").value = state;
+                            document.getElementById("country").value = country;
                         }
                     })
                     .catch(error => {
                         console.error("Error fetching location data:", error);
-                        document.getElementById("state").textContent = "Error fetching data";
-                        document.getElementById("country").textContent = "-";
+                        // Keep existing values on error
+                        document.getElementById("pincode").value = currentPin;
                     });
-            } else {
-                document.getElementById("state").textContent = "-";
-                document.getElementById("country").textContent = "-";
             }
         }
     </script>
