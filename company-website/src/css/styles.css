@@ -1,0 +1,289 @@
+:root {
+    --primary-color: #25D366; /* WhatsApp Green */
+    --secondary-color: #128C7E; /* Darker WhatsApp Green */
+    --text-color: #333;
+    --background-color: #fff;
+    --accent-color: #007bff; /* Blue accent for buttons */
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+header {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    padding: 20px 0;
+    text-align: center;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav a {
+    color: var(--background-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: var(--accent-color);
+}
+
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 2.4em;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+}
+
+/* Hero Section */
+#hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 70px 20px;
+    background-color: #f5f5f5;
+    flex-wrap: wrap;
+}
+
+#hero div {
+    flex: 1;
+    max-width: 600px;
+}
+
+#hero h1 {
+    color: #1a1a2e;
+    font-size: 2.5em;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+#hero p {
+    color: #333;
+    font-size: 1.2em;
+    margin: 20px 0;
+}
+
+#hero .btn {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1em;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#hero .btn:hover {
+    background-color: #0056b3;
+}
+
+#hero .btn:last-child {
+    background-color: #28a745;
+}
+
+#hero .btn:last-child:hover {
+    background-color: #1e7e34;
+}
+
+#hero img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #hero div {
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+
+    #hero h1 {
+        font-size: 2em;
+    }
+
+    #hero p {
+        font-size: 1em;
+    }
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    margin: 10px;
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* How It Works Section */
+#how-it-works {
+    background-color: #f9f9f9;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+#how-it-works h2 {
+    color: #1a1a2e;
+    font-size: 2.4em;
+    margin-bottom: 30px;
+}
+
+#how-it-works div {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#how-it-works div > div {
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#how-it-works h3 {
+    color: #007bff;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+}
+
+#how-it-works p {
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* Why Choose Us Section */
+#why-choose-us {
+    background-color: #ffffff;
+    color: #333;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+#why-choose-us h2 {
+    color: #1a1a2e;
+    font-size: 2.4em;
+    margin-bottom: 30px;
+}
+
+#why-choose-us div {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+#why-choose-us div > div {
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#why-choose-us h3 {
+    color: #007bff;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+}
+
+#why-choose-us p {
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* Who Can Join Section */
+#who-can-join {
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+#who-can-join h2 {
+    color: #1a1a2e;
+    font-size: 2.4em;
+    margin-bottom: 20px;
+}
+
+#who-can-join p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* For Advertisers Section */
+#for-advertisers {
+    background-color: #ffffff;
+    color: #333;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+#for-advertisers h2 {
+    color: #1a1a2e;
+    font-size: 2.4em;
+    margin-bottom: 20px;
+}
+
+#for-advertisers p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
