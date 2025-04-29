@@ -80,12 +80,28 @@
                         <label for="dob">Date of Birth</label>
                         <input type="date" id="dob" name="dob" required value="1990-01-15">
                     </div>
+                    
+                    <!-- Hidden fields -->
+                    <input type="hidden" id="terms-accepted" name="terms-accepted" value="Terms and conditions not accepted">
+                    <input type="hidden" id="registration_date" name="registration_date">
+                    
                     <!-- Honeypot field -->
                     <div class="form-group contact-field-hp" aria-hidden="true">
                         <label for="contact-email">Email</label>
                         <input type="text" id="contact-email" name="contact-email" autocomplete="off" tabindex="-1">
                     </div>
-                    <button type="submit" class="btn">Submit</button>
+
+                    <div class="terms-disclaimer">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="terms-accept" required>
+                            <label for="terms-accept">
+                                I have read and agree to the <a href="terms-and-conditions-for-posters.html" target="_blank">Terms and Conditions</a>
+                            </label>
+                        </div>
+                        <p class="disclaimer-text">Please carefully read our terms and conditions before proceeding. Your registration indicates acceptance of all terms.</p>
+                    </div>
+
+                    <button type="submit" class="btn" id="submit-btn" disabled>Submit Application</button>
                 </form>
                 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
                 <script>
@@ -103,12 +119,24 @@
                     document.getElementById("posterForm").addEventListener("submit", function(event) {
                         event.preventDefault();
                         
+                        // Honeypot check
                         const honeypot = document.getElementById("contact-email");
                         if (honeypot && honeypot.value.length > 0) {
                             console.log("Potential spam detected");
                             alert("Form submitted successfully!");
                             return;
                         }
+
+                        // Set registration date with formatted date and time
+                        const now = new Date();
+                        const formattedDate = now.toLocaleDateString('en-US', {
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                        document.getElementById("registration_date").value = formattedDate;
 
                         const submitButton = event.target.querySelector('button[type="submit"]');
                         submitButton.disabled = true;
@@ -132,6 +160,30 @@
                             submitButton.disabled = false;
                             submitButton.textContent = 'Submit';
                         });
+                    });
+
+                    document.getElementById("terms-accept").addEventListener("change", function(event) {
+                        const submitButton = document.getElementById("submit-btn");
+                        submitButton.disabled = !event.target.checked;
+                        
+                        // Update the hidden field value with a full statement
+                        const userName = document.getElementById("name").value || "[Applicant Name]";
+                        
+                        if (event.target.checked) {
+                            const acceptanceStatement = "I, " + userName + ", hereby accept and agree to abide by all the terms and conditions of StatusPay 247 as outlined in the Terms and Conditions document. I understand that by submitting this application, I am entering into a binding agreement with StatusPay 247.";
+                            document.getElementById("terms-accepted").value = acceptanceStatement;
+                        } else {
+                            document.getElementById("terms-accepted").value = "Terms and conditions not accepted";
+                        }
+                    });
+                    
+                    // Update acceptance statement when name changes
+                    document.getElementById("name").addEventListener("input", function() {
+                        if (document.getElementById("terms-accept").checked) {
+                            const userName = this.value || "[Applicant Name]";
+                            const acceptanceStatement = "I, " + userName + ", hereby accept and agree to abide by all the terms and conditions of StatusPay 247 as outlined in the Terms and Conditions document. I understand that by submitting this application, I am entering into a binding agreement with StatusPay 247.";
+                            document.getElementById("terms-accepted").value = acceptanceStatement;
+                        }
                     });
                 </script>
             </div>
