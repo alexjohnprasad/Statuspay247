@@ -667,6 +667,13 @@ footer {
     line-height: 1.5;
 }
 
+.copyright-notice {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 2rem;
+    color: var(--text-color);
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
     h1 {
