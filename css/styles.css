@@ -97,15 +97,19 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--primary-color);
     display: flex;
     align-items: center;
+    padding: 0.5rem 0;
+}
+
+.logo img {
+    height: 60px; /* Increased from 40px */
+    width: auto;
+    object-fit: contain;
 }
 
 .logo span {
@@ -260,7 +264,6 @@ nav a:hover:after {
     max-width: 100%;
     height: auto;
     border-radius: 10px;
-    box-shadow: var(--shadow);
 }
 
 /* Sections */
@@ -908,5 +911,63 @@ button[type="submit"]:disabled {
     
     .terms-content {
         padding: 0 0.5rem;
+    }
+}
+
+/* Split Layout for What is StatusPay Section */
+.split-layout {
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+    text-align: left;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.content-text {
+    flex: 1;
+    max-width: 600px;
+}
+
+.content-text p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.content-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.content-image img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+@media screen and (max-width: 992px) {
+    .split-layout {
+        flex-direction: column;
+        gap: 3rem;
+        padding: 1rem;
+    }
+
+    .content-text {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .content-image {
+        order: -1;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 0;
     }
 }
