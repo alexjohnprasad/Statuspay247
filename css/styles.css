@@ -971,3 +971,25 @@ button[type="submit"]:disabled {
         padding: 0;
     }
 }
+
+/* Advertiser Form Styles */
+.advertiser-section {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.advertiser-form {
+    position: relative;
+    z-index: 2;
+    background-color: var(--background-light);
+    margin-top: 2rem;
+    opacity: 1;
+    visibility: visible;
+}
+
+.advertiser-form .form-group {
+    margin-bottom: 2rem;
+}

@@ -1,8 +1,8 @@
 function toggleMenu() {
+    const menu = document.querySelector('nav ul');
     const burger = document.querySelector('.burger-menu');
-    const navMenu = document.querySelector('nav ul');
+    menu.classList.toggle('active');
     burger.classList.toggle('active');
-    navMenu.classList.toggle('active');
 }
 
 document.querySelector('.burger-menu').addEventListener('click', toggleMenu);
