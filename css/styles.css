@@ -882,11 +882,7 @@ footer {
 }
 
 .terms-section {
-    background-color: var(--background-color);
-    border-radius: 12px;
-    box-shadow: var(--shadow);
     padding: 2rem;
-    margin-bottom: 3rem;
 }
 
 .terms-section .section-title {
@@ -911,9 +907,10 @@ footer {
 
 .terms-content h2 {
     margin-top: 2rem;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: var(--primary-color);
     text-align: left;
+    margin-bottom: 0.5rem;
 }
 
 .terms-content h2:after {
@@ -922,11 +919,11 @@ footer {
 
 .terms-content ul {
     margin-left: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .terms-content ul li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     line-height: 1.6;
     color: var(--text-color);
 }
@@ -937,12 +934,29 @@ footer {
     border-top: 1px solid var(--border-color);
 }
 
+.terms-content section {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.terms-content section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.terms-content section p,
+.terms-content section ul {
+    margin-bottom: 0.5rem;
+}
+
+.terms-content section ul li {
+    margin-bottom: 0.25rem;
+}
+
 .terms-disclaimer {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    background-color: var(--background-light);
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
+    margin-top: 1.5rem;
+    padding-top: 1rem;
 }
 
 .checkbox-wrapper {
@@ -1295,4 +1309,164 @@ button[type="submit"]:disabled {
 .initial-faqs {
     max-width: 800px;
     margin: 0 auto;
+}
+
+/* Advertiser Terms Styles */
+.platform {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.terms-content section {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.terms-content section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.terms-content section p,
+.terms-content section ul {
+    margin-bottom: 0.5rem;
+}
+
+.terms-content section ul li {
+    margin-bottom: 0.25rem;
+}
+
+.terms-content section:last-of-type {
+    border-bottom: none;
+}
+
+.terms-content strong {
+    color: var(--primary-color);
+}
+
+.terms-content ul {
+    list-style: disc;
+    padding-left: 2rem;
+    margin: 0.5rem 0;
+}
+
+.terms-content ul li {
+    margin-bottom: 0.25rem;
+    color: var(--text-light);
+}
+
+/* Terms Page Redesign */
+.terms-header {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.terms-intro {
+    margin-top: 1.5rem;
+}
+
+.terms-meta {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+    color: var(--text-light);
+}
+
+.terms-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.terms-navigation {
+    background: var(--background-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.terms-nav-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.terms-nav-items a {
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.terms-nav-items a:hover {
+    background: var(--background-color);
+    box-shadow: var(--shadow);
+}
+
+.terms-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.terms-action {
+    position: sticky;
+    top: 100px;
+    background: var(--background-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.terms-summary {
+    margin-bottom: 2rem;
+}
+
+.terms-summary h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.terms-summary ul {
+    list-style: none;
+}
+
+.terms-summary li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-light);
+}
+
+.terms-accept {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (max-width: 992px) {
+    .terms-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .terms-action {
+        position: static;
+        margin-top: 2rem;
+    }
+}
+
+/* End Document Text */
+.end-document {
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 2rem 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
 }
