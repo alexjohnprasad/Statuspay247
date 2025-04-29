@@ -395,35 +395,51 @@ section {
     }
 }
 
-/* Clients Section */
-.clients-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+/* Clients Carousel */
+.clients-carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 2rem 0;
 }
 
-.client-card {
-    background-color: white;
-    border-radius: 8px;
-    padding: 1.5rem;
+.carousel-track {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-    height: 100%;
+    animation: scroll 30s linear infinite;
+    width: calc(250px * 16); /* Adjust based on number of slides including duplicates */
 }
 
-.client-card:hover {
-    transform: translateY(-5px);
+.client-slide {
+    flex: 0 0 250px;
+    padding: 1rem;
 }
 
-.client-card img {
-    max-width: 100%;
-    max-height: 80px;
-    width: auto;
+.client-slide img {
+    width: 100%;
     height: auto;
     object-fit: contain;
+    border-radius: 8px;
+    background-color: white;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.client-slide img:hover {
+    transform: scale(1.05);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-250px * 8)); /* Half of total width */
+    }
+}
+
+/* Remove old clients grid styles */
+.clients-grid {
+    display: none;
 }
 
 /* Why Choose Us Section */
