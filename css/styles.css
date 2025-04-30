@@ -116,6 +116,15 @@ nav {
     color: var(--accent-color);
 }
 
+.logo a {
+    text-decoration: none;
+    display: block;
+}
+
+.logo a:hover {
+    transform: none;
+}
+
 /* Navigation Menu */
 nav ul {
     display: flex;
