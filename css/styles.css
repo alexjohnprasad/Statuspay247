@@ -1481,3 +1481,59 @@ button[type="submit"]:disabled {
     padding-top: 2rem;
     border-top: 1px solid var(--border-color);
 }
+
+/* Trust Grid Styles */
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.trust-card {
+    background: var(--background-color);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.trust-card:hover {
+    transform: translateY(-5px);
+}
+
+.trust-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Company Info Styles */
+.company-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 2rem;
+    background: var(--background-light);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.cert-badges {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.cert-badges img {
+    height: 60px;
+    width: auto;
+}
+
+@media (max-width: 768px) {
+    .company-details {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
