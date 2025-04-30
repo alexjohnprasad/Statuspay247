@@ -1134,9 +1134,8 @@ button[type="submit"]:disabled {
 .advertiser-section {
     position: relative;
     z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    min-height: auto;
+    padding: 4rem 0;
 }
 
 .advertiser-form {
@@ -1144,8 +1143,11 @@ button[type="submit"]:disabled {
     z-index: 2;
     background-color: var(--background-light);
     margin-top: 2rem;
-    opacity: 1;
-    visibility: visible;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
 }
 
 .advertiser-form .form-group {
