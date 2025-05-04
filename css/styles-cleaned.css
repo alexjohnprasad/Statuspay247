@@ -390,7 +390,7 @@ section { padding: 5rem 0; }
 }
 .carousel-track {
     display: flex;
-    animation: scroll 30s linear infinite;
+    animation: scroll 60s linear infinite;
     width: calc(250px * 16);
 }
 .client-slide {
@@ -531,8 +531,50 @@ textarea { resize: vertical; }
 }
 .hidden { display: none; }
 
+/* Certifications */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+.cert-card {
+    background: var(--background-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+.cert-card:hover {
+    transform: translateY(-5px);
+}
+.cert-card img {
+    max-width: 100%;
+    height: auto;
+    max-height: 100px;
+    margin-bottom: 1rem;
+}
+.cert-card p {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
+.cert-card a {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* Terms Page */
 .terms-page { padding: 4rem 0 5rem; }
+.whatsapp-button-container {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 .back-button {
     display: inline-flex;
     align-items: center;
@@ -667,6 +709,14 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .btn, .btn-secondary, .btn-whatsapp {
+        text-align: center;
+        justify-content: center;
+    }
+    .whatsapp-button-container {
+        display: flex !important;
+        justify-content: center !important;
+    }
     section { padding: 3rem 0; }
     .hero-content {
         flex-direction: column;
