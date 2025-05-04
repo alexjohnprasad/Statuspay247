@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join StatusPay 247 as a Poster and start earning by sharing WhatsApp status ads.">
+    <meta name="keywords" content="Join, Poster, WhatsApp, Status, Ads, Earn Money">
+    <meta name="author" content="StatusPay 247">
+    <title>Join as Poster - StatusPay 247</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <link rel="shortcut icon" href="assets/favicon.png">
+    <link rel="stylesheet" href="css/styles-cleaned.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="assets/logo.png" alt="StatusPay 247 Logo">
+                    </a>
+                </div>
+                <div class="burger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul>
+                    <li><a href="index.html#hero">Home</a></li>
+                    <li><a href="index.html#what-is-statuspay">About</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="index.html#why-choose-us">Why Choose Us</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <li><a href="poster.html">Join as Poster</a></li>
+                    <li><a href="advertisers.html">Advertisers</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="join-poster" class="section-light">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Join as a Poster</h2>
+                </div>
+                <div class="section-content">
+                    <p>Fill out the form below to join StatusPay 247 as a poster and start earning by sharing WhatsApp status ads.</p>
+                </div>
+                <form id="posterForm" class="form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="whatsapp">WhatsApp Number</label>
+                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="Enter your WhatsApp number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="street">Street Address</label>
+                        <input type="text" id="street" name="street" placeholder="Enter your street address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" placeholder="Enter your city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postal-code">Postal Code</label>
+                        <input type="text" id="pincode" name="postal-code" placeholder="Enter your postal code" required pattern="\d{6}" title="Please enter a valid 6-digit postal code" oninput="getLocation()">
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                    
+                    <!-- Hidden fields -->
+                    <input type="hidden" id="terms-accepted" name="terms-accepted" value="Terms and conditions not accepted">
+                    <input type="hidden" id="registration_date" name="registration_date">
+                    
+                    <!-- Honeypot field -->
+                    <div class="form-group contact-field-hp" aria-hidden="true">
+                        <label for="contact-email">Email</label>
+                        <input type="text" id="contact-email" name="contact-email" autocomplete="off" tabindex="-1">
+                    </div>
+
+                    <div class="terms-disclaimer">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="terms-accept" required>
+                            <label for="terms-accept">
+                                I have read and agree to the <a href="terms-and-conditions-for-posters.html" target="_blank">Terms and Conditions</a>
+                            </label>
+                        </div>
+                        <p class="disclaimer-text">Please carefully read our terms and conditions before proceeding. Your registration indicates acceptance of all terms.</p>
+                    </div>
+
+                    <button type="submit" class="btn" id="submit-btn" disabled>Submit Application</button>
+                </form>
+                <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+                <script>
+                    (function() {
+                        emailjs.init({
+                            publicKey: "sOAeJekMKKXvYtpfo",
+                            blockHeadless: true,
+                            limitRate: {
+                                id: 'posterForm',
+                                throttle: 5000
+                            }
+                        });
+                    })();
+
+                    document.getElementById("posterForm").addEventListener("submit", function(event) {
+                        event.preventDefault();
+                        
+                        // Honeypot check
+                        const honeypot = document.getElementById("contact-email");
+                        if (honeypot && honeypot.value.length > 0) {
+                            console.log("Potential spam detected");
+                            alert("Form submitted successfully!");
+                            return;
+                        }
+
+                        // Set registration date with formatted date and time
+                        const now = new Date();
+                        const formattedDate = now.toLocaleDateString('en-US', {
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                        document.getElementById("registration_date").value = formattedDate;
+
+                        const submitButton = event.target.querySelector('button[type="submit"]');
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Sending...';
+
+                        emailjs.sendForm(
+                            "service_ssbh7pp",
+                            "template_jqkiw9f",
+                            event.target
+                        ).then(
+                            function(response) {
+                                console.log("SUCCESS", response);
+                                alert("Form submitted successfully!");
+                                event.target.reset();
+                            },
+                            function(error) {
+                                console.error("FAILED", error);
+                                alert("Failed to send form. Please try again later.");
+                            }
+                        ).finally(() => {
+                            submitButton.disabled = false;
+                            submitButton.textContent = 'Submit';
+                        });
+                    });
+
+                    document.getElementById("terms-accept").addEventListener("change", function(event) {
+                        const submitButton = document.getElementById("submit-btn");
+                        submitButton.disabled = !event.target.checked;
+                        
+                        // Update the hidden field value with a full statement
+                        const userName = document.getElementById("name").value || "[Applicant Name]";
+                        
+                        if (event.target.checked) {
+                            const acceptanceStatement = "I, " + userName + ", hereby accept and agree to abide by all the terms and conditions of StatusPay 247 as outlined in the Terms and Conditions document. I understand that by submitting this application, I am entering into a binding agreement with StatusPay 247.";
+                            document.getElementById("terms-accepted").value = acceptanceStatement;
+                        } else {
+                            document.getElementById("terms-accepted").value = "Terms and conditions not accepted";
+                        }
+                    });
+                    
+                    // Update acceptance statement when name changes
+                    document.getElementById("name").addEventListener("input", function() {
+                        if (document.getElementById("terms-accept").checked) {
+                            const userName = this.value || "[Applicant Name]";
+                            const acceptanceStatement = "I, " + userName + ", hereby accept and agree to abide by all the terms and conditions of StatusPay 247 as outlined in the Terms and Conditions document. I understand that by submitting this application, I am entering into a binding agreement with StatusPay 247.";
+                            document.getElementById("terms-accepted").value = acceptanceStatement;
+                        }
+                    });
+                </script>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>StatusPay 247</h3>
+                    <p>Your trusted platform for earning through WhatsApp status ads. Connect with us to start your earning journey today.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#what-is-statuspay">About Us</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#why-choose-us">Why Choose Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <p>Follow us on social media for updates and tips.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/statuspay247" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/statuspay247" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/statuspay247" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 StatusPay 247. All rights reserved.</p>
+                <p class="disclaimer">WhatsApp® is a registered trademark of Meta Platforms, Inc. We are not affiliated with or endorsed by WhatsApp® or Meta Platforms, Inc. The services we provide involve direct WhatsApp status marketing using our network of users, and the use of the WhatsApp® logo or name is strictly for illustrative purposes. All rights to WhatsApp® remain the property of Meta Platforms, Inc.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function getLocation() {
+            const pinCode = document.getElementById("pincode").value;
+            const currentPin = document.getElementById("pincode").value;
+
+            if (pinCode.length >= 3) {
+                const apiUrl = `https://api.zippopotam.us/in/${pinCode}`;
+
+                fetch(apiUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Invalid response from API");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data && data.places && data.places.length > 0) {
+                            const state = data.places[0]['state'] || "Unknown";
+                            const country = data['country'] || "Unknown";
+
+                            // Only suggest values, keep current postal code
+                            document.getElementById("pincode").value = currentPin;
+                            document.getElementById("state").value = state;
+                            document.getElementById("country").value = country;
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error fetching location data:", error);
+                        // Keep existing values on error
+                        document.getElementById("pincode").value = currentPin;
+                    });
+            }
+        }
+    </script>
+</body>
+</html>
