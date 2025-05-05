@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #2563EB;
-    --secondary-color: #1E40AF;
-    --accent-color: #10B981;
+    --primary-color: #1E977E;
+    --secondary-color: #17314B;
+    --accent-color: #1E977E;
     --text-color: #1F2937;
     --text-light: #4B5563;
     --background-color: #FFFFFF;
@@ -689,97 +689,165 @@ footer {
     line-height: 1.5;
 }
 
-/* Responsive Design */
-@media (max-width: 992px) {
-    h1 { font-size: 2.2rem; }
-    h2 { font-size: 1.8rem; }
-    .hero-text { padding-right: 0; }
-    .split-layout {
-        flex-direction: column;
-        gap: 3rem;
-    }
-    .content-text {
-        max-width: 100%;
-        text-align: center;
-    }
-    .split-benefits {
-        flex-direction: column;
-        gap: 2rem;
-    }
+/* Pricing Section */
+.pricing-tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+.pricing-tier {
+    background: var(--background-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+.pricing-tier:hover {
+    transform: translateY(-5px);
+}
+.pricing-tier.popular {
+    position: relative;
+    border: 2px solid var(--accent-color);
+}
+.popular-badge {
+    position: absolute;
+    top: 15px;
+    right: -30px;
+    background: var(--accent-color);
+    color: white;
+    padding: 0.25rem 2rem;
+    transform: rotate(45deg);
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+}
+.tier-header {
+    padding: 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+}
+.tier-header h3 {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+.price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 1rem 0;
+}
+.price-description {
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+.tier-features {
+    padding: 1.5rem;
+}
+.tier-features ul {
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+.tier-features li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.tier-features i {
+    color: var(--accent-color);
+}
+.pricing-comparison {
+    margin: 3rem 0;
+}
+.pricing-comparison table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--background-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+.pricing-comparison th,
+.pricing-comparison td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+.pricing-comparison th {
+    background: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
+.pricing-comparison tr:nth-child(even) {
+    background: var(--background-light);
+}
+.pricing-comparison i {
+    color: var(--accent-color);
 }
 
-@media (max-width: 768px) {
-    .btn, .btn-secondary, .btn-whatsapp {
-        text-align: center;
-        justify-content: center;
-    }
-    .whatsapp-button-container {
-        display: flex !important;
-        justify-content: center !important;
-    }
-    section { padding: 3rem 0; }
-    .hero-content {
-        flex-direction: column;
-    }
-    .hero-text {
-        max-width: 100%;
-        margin-bottom: 3rem;
-        text-align: center;
-    }
-    .hero-buttons {
-        justify-content: center;
-    }
-    .who-can-join-grid {
-        grid-template-columns: 1fr;
-    }
-    .features-grid,
-    .trust-grid {
-        grid-template-columns: 1fr;
-    }
-    .burger-menu {
-        display: flex;
-        opacity: 1;
-        visibility: visible;
-    }
-    nav ul {
-        display: none;
-        position: absolute;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background-color: var(--background-color);
-        box-shadow: var(--shadow);
-        z-index: 1000;
-        flex-direction: column;
-    }
-    nav ul.active {
-        display: flex;
-    }
-    nav ul li {
-        width: 100%;
-        margin: 0;
-        text-align: center;
-        padding: 1rem;
-        border-bottom: 1px solid var(--border-color);
-    }
+/* New Classes */
+.elevation {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 
-@media (min-width: 769px) {
-    nav ul {
-        display: flex;
-    }
-    .burger-menu {
-        display: none;
-    }
+.elevation:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
 }
 
-@media (max-width: 576px) {
-    .btn {
-        width: 100%;
-        text-align: center;
-    }
-    .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.icon-circle.primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.duration-flex {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.benefits-masonry {
+    column-count: 3;
+    column-gap: 2rem;
+}
+
+.value-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.process-timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.center {
+    text-align: center;
+}
+
+.featured {
+    border: 2px solid var(--primary-color);
+}
+
+.highlight {
+    color: var(--primary-color);
+    font-weight: bold;
 }
