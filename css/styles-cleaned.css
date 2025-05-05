@@ -782,9 +782,1150 @@ footer {
 .pricing-comparison tr:nth-child(even) {
     background: var(--background-light);
 }
-.pricing-comparison i {
+.pricing-comparison i.fa-check {
     color: var(--accent-color);
+    font-size: 1.2rem;
 }
+
+.pricing-comparison i.fa-times {
+    color: #EF4444; /* Or use a variable if defined */
+    font-size: 1.2rem;
+}
+
+
+/* --- Pricing Page Specific Styles --- */
+
+/* Pricing Hero */
+#pricing-hero {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 5rem 0;
+    margin-bottom: 0; /* Overrides default section padding */
+}
+
+#pricing-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: white; /* Ensure text color is white */
+}
+#pricing-hero h1:after {
+    display: none; /* Remove default h2 underline if applied */
+}
+
+
+#pricing-hero p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Pricing Tiers */
+.pricing-tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.pricing-tier {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid var(--border-color);
+}
+
+.pricing-tier:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-tier.popular {
+    border: none; /* Remove default border */
+    box-shadow: 0 15px 35px rgba(30, 151, 126, 0.15);
+    transform: scale(1.05); /* Make popular stand out */
+}
+
+.pricing-tier.popular:hover {
+    transform: scale(1.05) translateY(-10px); /* Combine hover effects */
+}
+
+.popular-badge {
+    position: absolute;
+    top: 12px;
+    right: -35px; /* Position badge outside */
+    background: var(--accent-color);
+    color: white;
+    padding: 0.5rem 2.5rem;
+    transform: rotate(45deg);
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(30, 151, 126, 0.2);
+    z-index: 10;
+}
+
+.tier-header {
+    padding: 2.5rem 1.5rem 1.5rem; /* Adjusted padding */
+    background: var(--primary-color);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* For pseudo-element */
+}
+
+.tier-header::before { /* Decorative element */
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0.6;
+}
+
+.tier-header h3 {
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    position: relative; /* Ensure text is above pseudo-element */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.price {
+    font-size: 3rem; /* Larger price font */
+    font-weight: 800;
+    margin: 1rem 0 0.5rem;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    color: white; /* Ensure price is white */
+}
+
+.price-description {
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    opacity: 1; /* Override default p opacity if needed */
+}
+
+.discount-text {
+    font-size: 0.9rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 0.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+}
+
+.tier-features {
+    padding: 2rem 1.5rem; /* Adjusted padding */
+}
+
+.tier-features ul {
+    list-style: none;
+    margin-bottom: 2rem; /* Increased margin */
+}
+
+.tier-features li {
+    margin-bottom: 1rem; /* Increased spacing */
+    display: flex;
+    align-items: flex-start; /* Align icon and text */
+    gap: 0.8rem;
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+.tier-features i.fas { /* Target FontAwesome icons specifically */
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    margin-top: 0.2rem; /* Align icon nicely */
+}
+
+.tier-features .btn { /* Style button within features */
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    display: flex; /* Center icon and text */
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* Pricing Notice */
+.pricing-notice {
+    max-width: 800px;
+    margin: 0 auto 3rem; /* Center and add bottom margin */
+}
+
+.pricing-notice .trust-card { /* Style trust cards within notice */
+    background: rgba(30, 151, 126, 0.1); /* Light accent background */
+    border-left: 4px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    text-align: left; /* Override default center align */
+    box-shadow: none; /* Remove default shadow if needed */
+    margin-bottom: 1rem; /* Space between notice cards */
+}
+.pricing-notice .trust-card:last-child {
+    margin-bottom: 0;
+}
+
+.pricing-notice i.fas { /* Style icons within notice */
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-top: 0.2rem;
+}
+.pricing-notice p {
+    margin-bottom: 0; /* Remove default p margin */
+    color: var(--text-color); /* Ensure text color */
+}
+.pricing-notice strong {
+    color: var(--text-color); /* Ensure strong text color */
+}
+
+/* Pricing Comparison Table */
+.pricing-comparison {
+    margin: 4rem 0; /* Adjusted margin */
+    overflow-x: auto; /* Allow horizontal scroll on small screens */
+}
+
+.pricing-comparison h3 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    color: var(--text-color);
+}
+.pricing-comparison h3:after { /* Remove underline if applied */
+    display: none;
+}
+
+.pricing-comparison table {
+    width: 100%;
+    border-collapse: separate; /* Use separate for border-spacing */
+    border-spacing: 0;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden; /* Clip content to rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.pricing-comparison th,
+.pricing-comparison td {
+    padding: 1.2rem 1.5rem; /* Adjusted padding */
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    border-right: none; /* Remove default border if applied */
+    border-left: none; /* Remove default border if applied */
+    border-top: none; /* Remove default border if applied */
+}
+
+.pricing-comparison th {
+    background: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.pricing-comparison th:first-child {
+    text-align: left; /* Align first header left */
+}
+
+.pricing-comparison td:first-child {
+    text-align: left; /* Align first cell left */
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.pricing-comparison tr:last-child td {
+    border-bottom: none; /* Remove bottom border on last row */
+}
+
+.pricing-comparison tr:nth-child(even) {
+    background: var(--background-light); /* Zebra striping */
+}
+
+/* Custom Plans Section */
+.custom-plans {
+    margin: 4rem 0 2rem; /* Adjusted margin */
+}
+
+.custom-plans .trust-card { /* Style card in custom plans */
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 2px solid var(--primary-color); /* Add border */
+    max-width: 800px; /* Limit width */
+    margin: 0 auto; /* Center */
+}
+.custom-plans .trust-card:hover {
+    transform: none; /* Disable hover transform if needed */
+}
+
+.custom-plans .trust-card i.fas { /* Icon style */
+    color: var(--primary-color);
+    font-size: 2rem; /* Adjust size */
+    margin-bottom: 1rem;
+}
+
+.custom-plans .trust-card h3 {
+    font-size: 1.8rem;
+    margin: 1rem 0;
+    color: var(--primary-color);
+}
+.custom-plans .trust-card h3:after { /* Remove underline if applied */
+    display: none;
+}
+
+.custom-plans .trust-card p {
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+    font-size: 1.1rem;
+    color: var(--text-light); /* Ensure text color */
+}
+
+.custom-plans .btn { /* Button style */
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+/* Duration Section */
+#duration { /* Target section specifically */
+    padding: 4rem 0; /* Adjust padding */
+}
+#duration .section-title.center h2:after { /* Ensure underline is present */
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-color);
+    display: block;
+}
+
+.duration-flex {
+    display: grid; /* Use grid for better alignment */
+    grid-template-columns: repeat(4, 1fr); /* Fixed 4 columns for better alignment */
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+@media (max-width: 1200px) {
+    .duration-flex {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on large screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .duration-flex {
+        grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+}
+
+.duration-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%; /* Make cards same height */
+    display: flex; /* Use flex for vertical centering */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.duration-card.elevation { /* Remove duplicate class if not needed */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.duration-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.duration-card.featured {
+    border: 2px solid var(--accent-color); /* Use accent color for featured */
+    position: relative;
+    overflow: hidden; /* For badge */
+}
+
+.duration-card.featured::before { /* Badge for featured */
+    content: 'Best Value';
+    position: absolute;
+    top: 12px;
+    right: -35px;
+    background: var(--accent-color);
+    color: white;
+    padding: 0.5rem 2.5rem;
+    transform: rotate(45deg);
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(30, 151, 126, 0.2);
+    z-index: 10;
+}
+
+.icon-circle {
+    width: 80px; /* Larger icon circle */
+    height: 80px;
+    border-radius: 50%;
+    background: var(--background-light); /* Use light background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.8rem; /* Adjust icon size */
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.icon-circle.primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.duration-card:hover .icon-circle {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.duration-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+.duration-card h3:after { /* Remove underline if applied */
+    display: none;
+}
+
+.duration-card p {
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.duration-card .highlight {
+    color: var(--accent-color); /* Use accent color */
+    font-weight: 700;
+    margin-top: 0.5rem;
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background: rgba(30, 151, 126, 0.1); /* Light accent background */
+    border-radius: 20px;
+}
+
+/* Benefits Section */
+#benefits { /* Target section specifically */
+    padding: 4rem 0; /* Adjust padding */
+}
+#benefits .section-title.center h2:after { /* Ensure underline */
+    display: block;
+}
+
+.benefits-masonry {
+    display: grid; /* Use grid */
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* Fixed 3 columns with equal width */
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+@media (max-width: 992px) {
+    .benefits-masonry {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .benefits-masonry {
+        grid-template-columns: minmax(0, 1fr); /* 1 column on small screens */
+    }
+}
+
+.benefit-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%; /* Equal height */
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-card i.fas { /* Target icons */
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover i.fas {
+    transform: scale(1.2);
+}
+
+.benefit-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+.benefit-card h3:after { /* Remove underline if applied */
+    display: none;
+}
+.benefit-card p {
+    color: var(--text-light); /* Ensure text color */
+    margin-bottom: 0; /* Remove default margin */
+}
+
+/* Value Proposition Section */
+#value { /* Target section */
+    padding: 4rem 0;
+    background: linear-gradient(to bottom, var(--background-light), white);
+}
+#value .section-title.center h2:after { /* Ensure underline */
+    display: block;
+}
+#value .section-title h2 {
+    color: var(--primary-color);
+    font-weight: 800;
+}
+
+.value-flex {
+    display: grid; /* Use grid */
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Equal width columns */
+    gap: 2.5rem;
+    margin: 3rem auto;
+    max-width: 1000px;
+}
+
+@media (max-width: 992px) {
+    .value-flex {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* Keep 2 equal columns on medium screens */
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .value-flex {
+        grid-template-columns: minmax(0, 1fr); /* 1 column on small screens */
+        gap: 1.5rem;
+    }
+}
+
+.value-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%; /* Equal height */
+    border-top: 5px solid var(--primary-color); /* Top border */
+    position: relative;
+    overflow: hidden;
+}
+
+.value-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(30, 151, 126, 0.05) 0%, rgba(255, 255, 255, 0) 50%);
+    z-index: 0;
+}
+
+.value-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.value-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    position: relative;
+    z-index: 1;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 1rem;
+}
+.value-card h3:after { /* Remove underline if applied */
+    display: none;
+}
+
+.value-card h3 i.fas { /* Icon style */
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    background: rgba(30, 151, 126, 0.1);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.value-card p {
+    color: var(--text-light); /* Ensure text color */
+    margin-bottom: 0; /* Remove default margin */
+    position: relative;
+    z-index: 1;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Cost-Effective Card Styling */
+.comparison-list {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.comparison-list li {
+    position: relative;
+    padding: 0.8rem 0;
+    color: var(--text-light);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.comparison-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.comparison-list li strong {
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.comparison-list li:nth-child(1) strong {
+    color: var(--primary-color);
+}
+
+.comparison-list li:nth-child(2) strong {
+    color: #4267B2; /* Facebook blue */
+}
+
+.comparison-list li:nth-child(3) strong {
+    color: #DB4437; /* Google red */
+}
+
+.comparison-list li:nth-child(4) strong {
+    color: #E1306C; /* Instagram pink */
+}
+
+/* How It Works / Process Section */
+#process { /* Target section */
+    padding: 4rem 0;
+}
+#process .section-title.center h2:after { /* Ensure underline */
+    display: block;
+}
+
+.process-timeline {
+    display: grid; /* Use grid */
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* Fixed 3 columns with equal width */
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+@media (max-width: 992px) {
+    .process-timeline {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .process-timeline {
+        grid-template-columns: minmax(0, 1fr); /* 1 column on small screens */
+    }
+}
+
+.process-step {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative; /* Keep for potential future pseudo-elements */
+    height: 100%; /* Equal height */
+}
+
+.process-step:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.process-step:hover .step-number {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(30, 151, 126, 0.3);
+}
+
+.process-step h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+.process-step h3:after { /* Remove underline if applied */
+    display: none;
+}
+.process-step p {
+    color: var(--text-light); /* Ensure text color */
+    margin-bottom: 0; /* Remove default margin */
+}
+
+/* Use Cases Section */
+#use-cases { /* Target section */
+    padding: 4rem 0;
+}
+#use-cases .section-title.center h2:after { /* Ensure underline */
+    display: block;
+}
+
+.use-cases-flex {
+    display: grid; /* Use grid */
+    grid-template-columns: repeat(5, minmax(0, 1fr)); /* Fixed 5 columns with equal width */
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+@media (max-width: 1200px) {
+    .use-cases-flex {
+        grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 columns on large screens */
+    }
+}
+
+@media (max-width: 992px) {
+    .use-cases-flex {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .use-cases-flex {
+        grid-template-columns: minmax(0, 1fr); /* 1 column on small screens */
+    }
+}
+
+.use-case-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%; /* Equal height */
+}
+
+.use-case-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.use-case-card i.fas { /* Target icons */
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.use-case-card:hover i.fas {
+    transform: scale(1.2);
+}
+
+.use-case-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+.use-case-card h3:after { /* Remove underline if applied */
+    display: none;
+}
+.use-case-card p {
+    color: var(--text-light); /* Ensure text color */
+    margin-bottom: 0; /* Remove default margin */
+}
+
+/* CTA Section within Use Cases */
+.cta-section {
+    margin: 4rem 0 2rem;
+    text-align: center;
+}
+.cta-section.centered { /* Ensure it's centered */
+    text-align: center;
+}
+
+.cta-section .btn {
+    margin: 0 0.5rem 1rem; /* Adjust margins */
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+/* FAQ Section */
+#faq { /* Target section */
+    padding: 4rem 0;
+}
+#faq .section-title.center h2:after { /* Ensure underline */
+    display: block;
+}
+
+.faq-accordion {
+    max-width: 800px;
+    margin: 3rem auto;
+}
+
+.faq-accordion .faq-group { /* Ensure group has margin */
+     margin-bottom: 0; /* Reset if needed */
+}
+
+.faq-accordion .faq-item {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 1.5rem; /* Spacing between items */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.faq-accordion .faq-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.faq-accordion .faq-item summary {
+    padding: 1.5rem 2rem; /* Adjusted padding */
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    position: relative;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-color);
+    background: transparent; /* Remove light background if applied */
+    border: none; /* Remove border if applied */
+}
+
+.faq-accordion .faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-accordion .faq-item summary::after {
+    content: '\f107';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.faq-accordion .faq-item[open] summary::after {
+    transform: rotate(180deg);
+}
+
+.faq-answer { /* Renamed from .faq-content for clarity */
+    padding: 0 2rem 1.5rem; /* Padding only when open */
+    color: var(--text-light);
+    border: none; /* Remove border if applied */
+}
+.faq-answer p {
+    margin-bottom: 0; /* Remove default p margin */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    /* General responsive adjustments */
+    .container {
+        padding: 0 15px;
+    }
+    
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.3rem; }
+    
+    /* Pricing page specific */
+    #pricing-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .pricing-tier.popular {
+        transform: scale(1); /* Reset scale on smaller screens */
+    }
+    
+    .pricing-tier.popular:hover {
+        transform: translateY(-10px); /* Keep hover effect */
+    }
+    
+    .pricing-comparison th,
+    .pricing-comparison td {
+        padding: 1rem; /* Adjust padding */
+    }
+    
+    /* Adjust grid columns for smaller screens */
+    .benefits-masonry {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on medium screens */
+    }
+    .value-flex {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* Keep 2 equal columns on medium screens */
+    }
+    .process-timeline {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on medium screens */
+    }
+    .use-cases-flex {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on medium screens */
+    }
+    .duration-flex {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Header & Navigation */
+    .burger-menu {
+        display: flex;
+    }
+    
+    nav ul {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: var(--background-color);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        box-shadow: var(--shadow);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+    }
+    
+    nav ul.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    nav ul li {
+        margin: 0.5rem 0;
+    }
+    
+    /* Sections */
+    section {
+        padding: 3rem 0;
+    }
+    
+    /* Hero Section */
+    .hero-content {
+        flex-direction: column;
+    }
+    
+    .hero-text {
+        padding-right: 0;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    /* Split Layout */
+    .split-layout {
+        flex-direction: column;
+        gap: 3rem;
+    }
+    
+    .content-text {
+        order: 2;
+    }
+    
+    .content-image {
+        order: 1;
+    }
+    
+    /* Who Can Join */
+    .who-can-join-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Split Benefits */
+    .split-benefits {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    /* Pricing page specific */
+    #pricing-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .pricing-tier {
+        margin-bottom: 1rem;
+    }
+    
+    .price {
+        font-size: 2.5rem;
+    }
+    
+    .pricing-comparison {
+        overflow-x: auto;
+    }
+    
+    /* Grid layouts for smaller screens */
+    .benefits-masonry,
+    .value-flex,
+    .process-timeline,
+    .use-cases-flex,
+    .duration-flex {
+        grid-template-columns: 1fr; /* Stack elements */
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Typography */
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.2rem; }
+    
+    /* Buttons */
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Pricing page specific */
+    #pricing-hero {
+        padding: 3rem 0;
+    }
+    
+    #pricing-hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    #pricing-hero p {
+        font-size: 1rem;
+    }
+    
+    .tier-header {
+        padding: 1.5rem 1rem 1rem;
+    }
+    
+    .price {
+        font-size: 2rem;
+    }
+    
+    .tier-features {
+        padding: 1.5rem 1rem;
+    }
+    
+    .pricing-notice .trust-card {
+        padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .pricing-notice i.fas {
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+    }
+    
+    .custom-plans .trust-card {
+        padding: 1.5rem;
+    }
+    
+    .custom-plans .trust-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .custom-plans .trust-card p {
+        font-size: 1rem;
+    }
+    
+    .duration-card,
+    .benefit-card,
+    .value-card,
+    .process-step,
+    .use-case-card {
+        padding: 1.5rem;
+    }
+    
+    .icon-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .faq-accordion .faq-item summary {
+        padding: 1.2rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .faq-answer {
+        padding: 0 1.5rem 1.2rem;
+    }
+}
+
+/* --- End Pricing Page Specific Styles --- */
+
 
 /* New Classes */
 .elevation {
@@ -823,13 +1964,6 @@ footer {
 .benefits-masonry {
     column-count: 3;
     column-gap: 2rem;
-}
-
-.value-flex {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: space-between;
 }
 
 .process-timeline {
