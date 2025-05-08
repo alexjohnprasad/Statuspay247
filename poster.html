@@ -50,48 +50,44 @@
                 <div class="section-content">
                     <p>Fill out the form below to join StatusPay 247 as a poster and start earning by sharing WhatsApp status ads.</p>
                 </div>
-                <form id="posterForm" class="form">
+                <form id="posterForm" class="form" action="https://docs.google.com/forms/d/e/1FAIpQLSf9gcM0RlKowj6GsS55rU-5fYApSOUljzsRetRA8w_Htl0eNg/formResponse" method="post" target="_blank">
                     <div class="form-group">
                         <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                        <input type="text" id="name" name="entry.644990948" placeholder="Enter your full name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                        <input type="email" id="email" name="entry.365909208" placeholder="Enter your email address" required>
                     </div>
                     <div class="form-group">
                         <label for="whatsapp">WhatsApp Number</label>
-                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="Enter your WhatsApp number" required>
+                        <input type="tel" id="whatsapp" name="entry.1384481799" placeholder="Enter your WhatsApp number" required>
                     </div>
                     <div class="form-group">
                         <label for="street">Street Address</label>
-                        <input type="text" id="street" name="street" placeholder="Enter your street address" required>
+                        <input type="text" id="street" name="entry.1784027061" placeholder="Enter your street address" required>
                     </div>
                     <div class="form-group">
                         <label for="city">City</label>
-                        <input type="text" id="city" name="city" placeholder="Enter your city" required>
+                        <input type="text" id="city" name="entry.1641803405" placeholder="Enter your city" required>
                     </div>
                     <div class="form-group">
                         <label for="postal-code">Postal Code</label>
-                        <input type="text" id="pincode" name="postal-code" placeholder="Enter your postal code" required pattern="\d{6}" title="Please enter a valid 6-digit postal code" oninput="getLocation()">
+                        <input type="text" id="pincode" name="entry.949189106" placeholder="Enter your postal code" required pattern="\d{6}" title="Please enter a valid 6-digit postal code" oninput="getLocation()">
                     </div>
                     <div class="form-group">
                         <label for="state">State</label>
-                        <input type="text" id="state" name="state" required>
+                        <input type="text" id="state" name="entry.327284084" required>
                     </div>
                     <div class="form-group">
                         <label for="country">Country</label>
-                        <input type="text" id="country" name="country" required>
+                        <input type="text" id="country" name="entry.2012686887" required>
                     </div>
                     <div class="form-group">
                         <label for="dob">Date of Birth</label>
-                        <input type="date" id="dob" name="dob" required>
+                        <input type="date" id="dob" name="entry.2125844010" required>
                     </div>
-                    
-                    <!-- Hidden fields -->
-                    <input type="hidden" id="terms-accepted" name="terms-accepted" value="Terms and conditions not accepted">
-                    <input type="hidden" id="registration_date" name="registration_date">
-                    
+
                     <!-- Honeypot field -->
                     <div class="form-group contact-field-hp" aria-hidden="true">
                         <label for="contact-email">Email</label>
@@ -123,30 +119,8 @@
 
                     <button type="submit" class="btn" id="submit-btn" disabled>Submit Application</button>
                 </form>
-                <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
                 <script>
-                    (function() {
-                        emailjs.init({
-                            publicKey: "sOAeJekMKKXvYtpfo",
-                            blockHeadless: true,
-                            limitRate: {
-                                id: 'posterForm',
-                                throttle: 5000
-                            }
-                        });
-                    })();
-
-                    // Simple hash function for email
-                    function simpleHash(str) {
-                        let hash = 0;
-                        for (let i = 0; i < str.length; i++) {
-                            const char = str.charCodeAt(i);
-                            hash = ((hash << 5) - hash) + char;
-                            hash = hash & hash; // Convert to 32bit integer
-                        }
-                        return hash.toString();
-                    }
-
                     // Generate random CAPTCHA challenge
                     function generateCaptcha() {
                         const num1 = Math.floor(Math.random() * 10) + 1;
@@ -161,11 +135,10 @@
                     let currentCaptcha = generateCaptcha();
 
                     document.getElementById("posterForm").addEventListener("submit", function(event) {
-                        event.preventDefault();
-                        
                         // Honeypot check
                         const honeypot = document.getElementById("contact-email");
                         if (honeypot && honeypot.value.length > 0) {
+                            event.preventDefault();
                             console.log("Potential spam detected");
                             alert("Form submitted successfully!");
                             return;
@@ -176,67 +149,26 @@
                         const correctAnswer = currentCaptcha.num1 + currentCaptcha.num2;
                         
                         if (isNaN(userAnswer) || userAnswer !== correctAnswer) {
+                            event.preventDefault();
                             alert("Incorrect answer. Please try the math challenge again.");
                             currentCaptcha = generateCaptcha();
                             return;
                         }
 
                         const phone = document.getElementById("whatsapp").value;
-                        const email = document.getElementById("email").value;
 
                         // Only allow +91 or 10-digit Indian numbers
                         const indianPhonePattern = /^(\+91)?[6-9][0-9]{9}$/;
                         if (!indianPhonePattern.test(phone)) {
+                            event.preventDefault();
                             alert("Only Indian WhatsApp numbers are accepted (10 digits starting with 6-9 or +91 prefix)");
                             return;
                         }
 
-                        const emailHash = simpleHash(email);
-                        const submittedEmails = JSON.parse(localStorage.getItem('submittedEmails') || "[]");
-
-                        // Check if email was already submitted
-                        if (submittedEmails.includes(emailHash)) {
-                            alert("This email has already been used to submit the form. Please use a different email address.");
-                            return;
-                        }
-
-                        // Set registration date with formatted date and time
-                        const now = new Date();
-                        const formattedDate = now.toLocaleDateString('en-US', {
-                            year: 'numeric', 
-                            month: 'long', 
-                            day: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                        });
-                        document.getElementById("registration_date").value = formattedDate;
-
-                        const submitButton = event.target.querySelector('button[type="submit"]');
-                        submitButton.disabled = true;
-                        submitButton.textContent = 'Sending...';
-
-                        emailjs.sendForm(
-                            "service_ssbh7pp",
-                            "template_jqkiw9f",
-                            event.target
-                        ).then(
-                            function(response) {
-                                console.log("SUCCESS", response);
-                                // Store email hash after successful submission
-                                submittedEmails.push(emailHash);
-                                localStorage.setItem('submittedEmails', JSON.stringify(submittedEmails));
-                                // Show success popup
-                                document.getElementById("success-popup").style.display = "flex";
-                                event.target.reset();
-                            },
-                            function(error) {
-                                console.error("FAILED", error);
-                                alert("Failed to send form. Please try again later.");
-                            }
-                        ).finally(() => {
-                            submitButton.disabled = false;
-                            submitButton.textContent = 'Submit';
-                        });
+                        // Show success popup after form submission
+                        setTimeout(() => {
+                            document.getElementById("success-popup").style.display = "flex";
+                        }, 1000);
                     });
 
                     document.getElementById("terms-accept").addEventListener("change", function(event) {
