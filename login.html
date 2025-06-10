@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - StatusPay247</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <link rel="shortcut icon" href="assets/favicon.png">
+    <link rel="stylesheet" href="css/styles-cleaned.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        .lang-select-bar {
+            width: 100%;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.7rem;
+            padding: 0.5rem 0.5rem;
+            font-size: 1rem;
+            position: relative;
+            z-index: 900;
+            min-height: 38px;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .lang-label {
+            font-size: 1rem;
+            color: #444;
+            margin-right: 0.5rem;
+            white-space: normal;
+            flex-shrink: 0;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .lang-select-bar button {
+            background: #fff;
+            color: #1E977E;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            padding: 0.25rem 1.1rem;
+            font-size: 1rem;
+            margin: 0 0.1rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+            outline: none;
+            font-family: inherit;
+            font-weight: 600;
+            box-shadow: 0 1px 2px rgba(30,151,126,0.04);
+        }
+
+        .lang-select-bar button.active,
+        .lang-select-bar button:focus {
+            background: #1E977E;
+            color: #fff;
+            border: 1.5px solid #1E977E;
+        }
+
+        .lang-select-bar button:hover:not(.active) {
+            background: #e6f7f2;
+            color: #17314B;
+            border-color: #1E977E;
+        }
+        
+        @media (max-width: 600px) {
+            .lang-select-bar {
+                font-size: 0.97rem;
+                padding: 0.2rem 0.1rem;
+                gap: 0.2rem;
+                min-height: 0;
+            }
+            .lang-label {
+                font-size: 0.97rem;
+                margin: 0.2rem 0;
+                width: 100%;
+                flex-basis: 100%;
+                display: block;
+            }
+            .lang-select-bar button {
+                font-size: 0.97rem;
+                padding: 0.18rem 0.7rem;
+                min-width: 70px;
+                margin-bottom: 0.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <a href="/">
+                        <img src="assets/logo.png" alt="StatusPay247 Logo">
+                    </a>
+                </div>
+                <div class="burger-menu" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul>
+                    <li><a href="index.html#hero">Home</a></li>
+                    <li><a href="poster.html">Join as Poster</a></li>
+                    <li><a href="advertise-with-us.html">Advertise With Us</a></li>
+                    <li><a href="login.html" class="btn btn-secondary">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Language selection: simple, minimal, one line, no extra styling -->
+    <div class="lang-select-bar">
+        <span class="lang-label">
+            Choose your language / നിങ്ങളുടെ ഭാഷ തിരഞ്ഞെടുക്കുക:
+        </span>
+        <button type="button" id="btn-en" class="active">English</button>
+        <button type="button" id="btn-ml">മലയാളം</button>
+    </div>
+
+    <main>
+        <section class="login-section">
+            <div class="login-outer-wrapper login-outer-wrapper--centered">
+                <div class="login-form-side login-form-side--centered">
+                    <div class="login-card-modern">
+                        <div class="login-header-modern">
+                            <img src="assets/logo.png" alt="StatusPay247 Logo">
+                            <h2>Sign In</h2>
+                        </div>
+                        <div id="login-status" class="login-status-modern" style="display: none;">
+                            <div class="spinner"></div>
+                            <span id="status-message">Connecting to server...</span>
+                        </div>
+                        <div id="login-error" class="login-error-modern" style="display: none;">
+                            <strong>Login Error:</strong> <span id="error-message"></span>
+                            <div id="error-details"></div>
+                        </div>
+                        <form id="loginForm" class="login-form-modern">
+                            <div class="form-group-modern">
+                                <label for="phone">WhatsApp Number</label>
+                                <input type="tel" id="phone" placeholder="Enter your WhatsApp number" required autocomplete="username">
+                            </div>
+                            <div class="form-group-modern">
+                                <label for="password">Password</label>
+                                <div class="password-input-container-modern">
+                                    <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+                                    <span class="password-toggle-modern" onclick="togglePasswordVisibility('password')">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <button type="submit" class="login-btn-modern">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </button>
+                        </form>
+                        <div class="login-footer-modern">
+                            <p>Don't have an account? <a href="poster.html">Register here</a></p>
+                            <p>
+                                <a href="https://wa.me/919744483058?text=Hi%20StatusPay247%2C%20I%20forgot%20my%20password%20and%20need%20help%20to%20change%20it." target="_blank" rel="noopener">
+                                    Forgot password?
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="copyright" style="background-color:#1F2937; color:white; padding:0;">
+            <p style="margin-top:1.5rem;">&copy; 2025 StatusPay247. All rights reserved.</p>
+            <div class="footer-social" style="margin:1rem 0 0.5rem 0;">
+                <a href="https://x.com/statuspay247" target="_blank" style="color:#fff; margin:0 0.5em; font-size:1.3em;" aria-label="X.com">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61576782695560" target="_blank" style="color:#fff; margin:0 0.5em; font-size:1.3em;" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/statuspay247" target="_blank" style="color:#fff; margin:0 0.5em; font-size:1.3em;" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/company/statuspay247" target="_blank" style="color:#fff; margin:0 0.5em; font-size:1.3em;" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <p class="disclaimer" style="color:#9CA3AF;">WhatsApp® is a registered trademark of Meta Platforms, Inc. We are not affiliated with or endorsed by WhatsApp® or Meta Platforms, Inc. The services we provide involve direct WhatsApp status marketing using our network of users, and the use of the WhatsApp® logo or name is strictly for illustrative purposes. All rights to WhatsApp® remain the property of Meta Platforms, Inc.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Function to hash passwords consistently using SHA-256
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            if (!crypto || !crypto.subtle || !TextEncoder) {
+                showError('Your browser does not support the required cryptography functions. Please use a modern browser.');
+                return null;
+            }
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        // Function to show error message
+        function showError(message, details) {
+            const errorElement = document.getElementById('login-error');
+            const errorMessage = document.getElementById('error-message');
+            const errorDetails = document.getElementById('error-details');
+            errorMessage.textContent = message;
+            if (details) {
+                errorDetails.textContent = details;
+                errorDetails.style.display = 'block';
+            } else {
+                errorDetails.style.display = 'none';
+            }
+            errorElement.style.display = 'block';
+            document.getElementById('login-status').style.display = 'none';
+        }
+
+        // Function to show status message (modified: only show "Authenticating..." and "Logging in...")
+        function showStatus(message) {
+            // Only show status for "Authenticating..." or "Logging in..."
+            if (message === 'Authenticating...' || message === 'Logging in...') {
+                document.getElementById('status-message').textContent = message;
+                document.getElementById('login-status').style.display = 'block';
+            } else {
+                document.getElementById('login-status').style.display = 'none';
+            }
+            document.getElementById('login-error').style.display = 'none';
+        }
+
+        // Function to handle successful login
+        function handleLoginSuccess(response, phone) {
+            // Store the full user object in localStorage, including eligible
+            localStorage.setItem('user', JSON.stringify(response.user));
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('loginTime', new Date().toISOString());
+            // Remove old keys if present
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('userPhone');
+            window.location.href = 'dashboard.html';
+        }
+
+        // Password visibility toggle
+        function togglePasswordVisibility(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            // Save value and selection
+            const value = passwordInput.value;
+            const selectionStart = passwordInput.selectionStart;
+            const selectionEnd = passwordInput.selectionEnd;
+
+            // Change type
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Restore value and selection (prevents losing caret and style jump)
+            passwordInput.value = value;
+            if (passwordInput.setSelectionRange) {
+                passwordInput.setSelectionRange(selectionStart, selectionEnd);
+            }
+
+            // Force reflow to fix style loss in some browsers
+            passwordInput.classList.remove('force-style-fix');
+            // No need for void passwordInput.offsetWidth; since toggling the class is enough for most cases
+            passwordInput.classList.add('force-style-fix');
+
+            // Toggle the eye icon (works for both modern and classic)
+            const toggleIcon = document.querySelector(
+                '#' + inputId + ' + .password-toggle-modern i, #' + inputId + ' + .password-toggle i'
+            );
+            if (toggleIcon) {
+                toggleIcon.classList.toggle('fa-eye');
+                toggleIcon.classList.toggle('fa-eye-slash');
+            }
+
+            // Keep focus on input
+            passwordInput.focus();
+        }
+
+        // Form submission handler with multiple fallback methods
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const loginBtn = document.querySelector('.login-btn-modern');
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+            loginBtn.disabled = true;
+            const phone = document.getElementById('phone').value.replace(/[^0-9]/g, "").slice(-10);
+            const password = document.getElementById('password').value;
+            if (!phone || !password) {
+                showError('Please fill in all fields');
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt" style="margin-right: 10px;"></i> Login';
+                loginBtn.disabled = false;
+                return;
+            }
+            try {
+                showStatus('Authenticating...');
+                const hashedPassword = await hashPassword(password);
+                if (!hashedPassword) {
+                    showError('Password hashing failed. Please use a modern browser.');
+                    loginBtn.innerHTML = '<i class="fas fa-sign-in-alt" style="margin-right: 10px;"></i> Login';
+                    loginBtn.disabled = false;
+                    return;
+                }
+                const apiUrl = 'https://script.google.com/macros/s/AKfycbzraI_Ii_8bfSxaqYHmo2FhONUPcYxJuRhZghQueuvwZ4bQskpc40nqczAQYazramSRYw/exec';
+                try {
+                    showStatus('Testing connection...');
+                    const pingResponse = await fetch(apiUrl + '?test=ping', {
+                        method: 'GET',
+                        mode: 'cors',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'text/plain'
+                        }
+                    });
+                } catch (pingError) {}
+                let loginResponse = null;
+                let errorMessages = [];
+                showStatus('Trying direct fetch...');
+                try {
+                    const fetchResponse = await fetch(apiUrl, {
+                        method: 'POST',
+                        mode: 'cors',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams({
+                            'action': 'login',
+                            'phone': phone,
+                            'password': hashedPassword
+                        })
+                    });
+                    if (fetchResponse.ok) {
+                        loginResponse = await fetchResponse.json();
+                    } else {
+                        errorMessages.push('Fetch failed with status: ' + fetchResponse.status);
+                        const text = await fetchResponse.text();
+                        errorMessages.push('Fetch response: ' + text);
+                    }
+                } catch (fetchError) {
+                    errorMessages.push('Fetch error: ' + fetchError.message);
+                }
+                if (!loginResponse) {
+                    showStatus('Trying JSONP...');
+                    try {
+                        loginResponse = await new Promise((resolve, reject) => {
+                            const callbackName = 'loginCallback_' + new Date().getTime();
+                            const timeoutId = setTimeout(function() {
+                                if (window[callbackName]) {
+                                    delete window[callbackName];
+                                    if (document.getElementById('jsonp-script')) {
+                                        document.body.removeChild(document.getElementById('jsonp-script'));
+                                    }
+                                    reject(new Error('JSONP request timed out'));
+                                }
+                            }, 20000);
+                            window[callbackName] = function(response) {
+                                clearTimeout(timeoutId);
+                                if (document.getElementById('jsonp-script')) {
+                                    document.body.removeChild(document.getElementById('jsonp-script'));
+                                }
+                                delete window[callbackName];
+                                if (response && response.success) {
+                                    resolve(response);
+                                } else {
+                                    reject(new Error(response ? response.message : 'Login failed'));
+                                }
+                            };
+                            const script = document.createElement('script');
+                            script.id = 'jsonp-script';
+                            script.src = 'https://script.google.com/macros/s/AKfycbzraI_Ii_8bfSxaqYHmo2FhONUPcYxJuRhZghQueuvwZ4bQskpc40nqczAQYazramSRYw/exec' +
+                                '?action=login' +
+                                '&phone=' + encodeURIComponent(phone) +
+                                '&password=' + encodeURIComponent(hashedPassword) +
+                                '&callback=' + callbackName +
+                                '&t=' + new Date().getTime();
+                            document.body.appendChild(script);
+                        });
+                    } catch (jsonpError) {
+                        errorMessages.push('JSONP error: ' + jsonpError.message);
+                    }
+                }
+                if (!loginResponse) {
+                    showStatus('Trying form submission...');
+                    try {
+                        loginResponse = await new Promise((resolve, reject) => {
+                            const iframe = document.createElement('iframe');
+                            iframe.style.display = 'none';
+                            iframe.name = 'login-target-' + new Date().getTime();
+                            document.body.appendChild(iframe);
+                            const form = document.createElement('form');
+                            form.style.display = 'none';
+                            form.method = 'POST';
+                            form.action = apiUrl;
+                            form.target = iframe.name;
+                            const addField = (name, value) => {
+                                const input = document.createElement('input');
+                                input.type = 'hidden';
+                                input.name = name;
+                                input.value = value;
+                                form.appendChild(input);
+                            };
+                            addField('action', 'login');
+                            addField('phone', phone);
+                            addField('password', hashedPassword);
+                            document.body.appendChild(form);
+                            const timeoutId = setTimeout(function() {
+                                document.body.removeChild(iframe);
+                                document.body.removeChild(form);
+                                reject(new Error('Form submission timed out'));
+                            }, 20000);
+                            iframe.onload = function() {
+                                try {
+                                    clearTimeout(timeoutId);
+                                    const iframeContent = iframe.contentWindow.document.body.textContent;
+                                    let response = null;
+                                    try {
+                                        response = JSON.parse(iframeContent);
+                                    } catch (parseError) {
+                                        errorMessages.push('Iframe parse error: ' + parseError.message);
+                                        errorMessages.push('Iframe content: ' + iframeContent);
+                                    }
+                                    document.body.removeChild(iframe);
+                                    document.body.removeChild(form);
+                                    if (response && response.success) {
+                                        resolve(response);
+                                    } else {
+                                        reject(new Error('Form submission failed'));
+                                    }
+                                } catch (error) {
+                                    document.body.removeChild(iframe);
+                                    document.body.removeChild(form);
+                                    reject(error);
+                                }
+                            };
+                            form.submit();
+                        });
+                    } catch (formError) {
+                        errorMessages.push('Form submission error: ' + formError.message);
+                    }
+                }
+                if (loginResponse && loginResponse.success) {
+                    handleLoginSuccess(loginResponse, phone);
+                } else {
+                    let userFriendlyMsg = 'Login failed. ';
+                    if (!navigator.onLine) {
+                        userFriendlyMsg += 'You appear to be offline. Please check your internet connection and try again.';
+                    } else if (
+                        errorMessages.some(msg => msg.includes('Failed to fetch') || msg.includes('CORS'))
+                    ) {
+                        userFriendlyMsg += 'Unable to connect to the server. This may be due to network issues or browser security restrictions (CORS). Please try again later or use a different browser/network.';
+                    } else {
+                        userFriendlyMsg += 'All login methods failed. Please try again later.';
+                    }
+                    showError(userFriendlyMsg, errorMessages.join('\n'));
+                    throw new Error(userFriendlyMsg + ' Details: ' + errorMessages.join(' | '));
+                }
+            } catch (error) {
+                let msg = error && error.message ? error.message : 'Login failed due to an unknown error.';
+                if (
+                    msg.includes('All login methods failed') ||
+                    msg.includes('Login failed') ||
+                    msg.includes('Details:')
+                ) {
+                    msg = 'Incorrect phone number or password. Please try again.';
+                }
+                showError(msg, '');
+            } finally {
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt" style="margin-right: 10px;"></i> Login';
+                loginBtn.disabled = false;
+            }
+        });
+
+        // Check for registration data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const registrationData = localStorage.getItem('registrationData');
+            const urlParams = new URLSearchParams(window.location.search);
+            const fromRegistration = urlParams.get('fromRegistration') === 'true';
+            
+            if (fromRegistration && registrationData) {
+                try {
+                    const data = JSON.parse(registrationData);
+                    document.getElementById('phone').value = data.phone || '';
+                    document.getElementById('password').value = data.password || '';
+                    
+                    // Clear registration data after use
+                    localStorage.removeItem('registrationData');
+                    
+                    // Auto submit if data exists
+                    if (data.phone && data.password) {
+                        document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+                    }
+                } catch (error) {
+                    console.error('Error parsing registration data:', error);
+                }
+            }
+        });
+
+        // Show CORS warning if running from file://
+        if (window.location.protocol === 'file:') {
+            document.getElementById('cors-warning').style.display = 'block';
+            console.warn('You are running from file://. For login to work, serve this page from a local web server.');
+        }
+
+        // --- Language Preference Tracking Across Pages ---
+        // Set language button state and persist selection
+        function setLanguage(lang) {
+            if (lang === 'ml') {
+                document.getElementById('btn-ml').classList.add('active');
+                document.getElementById('btn-en').classList.remove('active');
+                // Update content based on language (example)
+                document.querySelector('.login-header-modern h2').textContent = 'Sign In / സൈൻ ഇൻ';
+                document.querySelector('.login-form-modern label[for="phone"]').textContent = 'WhatsApp Number / WhatsApp നമ്പർ';
+                document.querySelector('.login-form-modern input[id="phone"]').placeholder = 'Enter your WhatsApp number / നിങ്ങളുടെ WhatsApp നമ്പർ നൽകുക';
+                document.querySelector('.login-form-modern label[for="password"]').textContent = 'Password / പാസ്‌വേഡ്';
+                document.querySelector('.login-form-modern input[id="password"]').placeholder = 'Enter your password / നിങ്ങളുടെ പാസ്‌വേഡ് നൽകുക';
+                document.querySelector('.login-btn-modern').textContent = 'Login / ലോഗിൻ';
+                document.querySelector('.login-footer-modern p:first-child a').textContent = 'Register here / ഇവിടെ രജിസ്റ്റർ ചെയ്യുക';
+                document.querySelector('.login-footer-modern p:last-child a').textContent = 'Forgot password? / പാസ്‌വേഡ് മറന്നോ?';
+            } else {
+                document.getElementById('btn-en').classList.add('active');
+                document.getElementById('btn-ml').classList.remove('active');
+                // Update content based on language (example)
+                document.querySelector('.login-header-modern h2').textContent = 'Sign In';
+                document.querySelector('.login-form-modern label[for="phone"]').textContent = 'WhatsApp Number';
+                document.querySelector('.login-form-modern input[id="phone"]').placeholder = 'Enter your WhatsApp number';
+                document.querySelector('.login-form-modern label[for="password"]').textContent = 'Password';
+                document.querySelector('.login-form-modern input[id="password"]').placeholder = 'Enter your password';
+                document.querySelector('.login-btn-modern').textContent = 'Login';
+                document.querySelector('.login-footer-modern p:first-child a').textContent = 'Register here';
+                document.querySelector('.login-footer-modern p:last-child a').textContent = 'Forgot password?';
+            }
+            localStorage.setItem('statuspay247_lang', lang);
+        }
+
+        // On load, check localStorage for language preference
+        var savedLang = localStorage.getItem('statuspay247_lang');
+        setLanguage(savedLang === 'ml' ? 'ml' : 'en');
+
+        // Add event listeners to language buttons
+        document.getElementById('btn-en').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            setLanguage('en');
+        });
+
+        document.getElementById('btn-ml').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            setLanguage('ml');
+        });
+
+        // Make togglePasswordVisibility globally accessible
+        window.togglePasswordVisibility = togglePasswordVisibility;
+    </script>
+</body>
+</html>

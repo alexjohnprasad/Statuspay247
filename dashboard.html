@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>StatusPay247 Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="shortcut icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="css/styles-cleaned.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <script src="js/main.js" defer></script>
+  <style>
+    /* Dashboard-specific styles using the provided color scheme */
+    .dashboard-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 3rem 0;
+      margin-bottom: 3rem;
+    }
+    
+    .dashboard-welcome {
+      text-align: center;
+    }
+    
+    .dashboard-welcome h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .dashboard-welcome p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .dashboard-card {
+      background: var(--background-color);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+    
+    .dashboard-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .card-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      color: white;
+    }
+    
+    .wallet-icon {
+      background: var(--primary-color);
+    }
+    
+    .profile-icon {
+      background: var(--secondary-color);
+    }
+    
+    .stats-icon {
+      background: var(--accent-color);
+    }
+    
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-color);
+      margin: 0;
+    }
+    
+    .wallet-balance {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin: 1rem 0;
+      text-align: center;
+    }
+    
+    .progress-container {
+      background: var(--background-dark);
+      border-radius: 25px;
+      height: 12px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      border-radius: 25px;
+      transition: width 0.8s ease;
+      position: relative;
+    }
+    
+    .progress-label {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+    }
+    
+    .wallet-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    
+    .wallet-detail {
+      text-align: center;
+      padding: 1rem;
+      background: var(--background-light);
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+    
+    .wallet-detail-label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+    
+    .wallet-detail-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    
+    .profile-info {
+      display: grid;
+      gap: 1rem;
+    }
+    
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .info-item:last-child {
+      border-bottom: none;
+    }
+    
+    .info-label {
+      font-weight: 600;
+      color: var(--text-light);
+    }
+    
+    .info-value {
+      color: var(--text-color);
+      font-weight: 500;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 1rem;
+      background: var(--background-light);
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      display: block;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+    }
+    
+    .loading-spinner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+      text-align: center;
+    }
+    
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid var(--background-dark);
+      border-top: 4px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .loading-spinner h3 {
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
+    }
+    
+    .loading-spinner p {
+      color: var(--text-light);
+    }
+    
+    .error-container {
+      text-align: center;
+      padding: 3rem;
+      color: #e74c3c;
+    }
+    
+    .error-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .error-container h3 {
+      color: var(--text-color);
+      margin-bottom: 1rem;
+    }
+    
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 1.5rem;
+      background: var(--background-color);
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .action-btn:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    
+    .action-btn i {
+      margin-right: 0.5rem;
+    }
+    
+    .status-badge {
+      color: var(--primary-color);
+      font-weight: 600;
+      background: rgba(30, 151, 126, 0.1);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+      .dashboard-welcome h1 {
+        font-size: 2rem;
+      }
+      
+      .wallet-balance {
+        font-size: 2.5rem;
+      }
+      
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .wallet-details {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Custom styles for wallet withdraw button */
+    .wallet-withdraw-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      display: inline-block;
+      text-align: center;
+      min-width: 180px;
+    }
+    
+    .wallet-withdraw-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .withdraw-note {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+    }
+
+    /* Updated Language selection bar styles */
+    .lang-select-wrapper {
+      width: 100%;
+      background: var(--background-light);
+      border-bottom: 1px solid var(--border-color);
+      margin: 0 0 2rem 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    
+    .lang-select-bar {
+        width: 100%;
+        background: #f8f9fa;
+        border-bottom: 1px solid #e5e7eb;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+        padding: 0.5rem 0.5rem;
+        font-size: 1rem;
+        position: relative;
+        z-index: 900;
+        min-height: 38px;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    .lang-label {
+        font-size: 1rem;
+        color: #444;
+        margin-right: 0.5rem;
+        white-space: normal;
+        flex-shrink: 0;
+        text-align: center;
+        line-height: 1.4;
+    }
+
+    .lang-select-bar button {
+        background: #fff;
+        color: #1E977E;
+        border: 1px solid #d1d5db;
+        border-radius: 5px;
+        padding: 0.25rem 1.1rem;
+        font-size: 1rem;
+        margin: 0 0.1rem;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, border 0.2s;
+        outline: none;
+        font-family: inherit;
+        font-weight: 600;
+        box-shadow: 0 1px 2px rgba(30,151,126,0.04);
+    }
+
+    .lang-select-bar button.active,
+    .lang-select-bar button:focus {
+        background: #1E977E;
+        color: #fff;
+        border: 1.5px solid #1E977E;
+    }
+
+    .lang-select-bar button:hover:not(.active) {
+        background: #e6f7f2;
+        color: #17314B;
+        border-color: #1E977E;
+    }
+    
+    @media (max-width: 600px) {
+        .lang-select-bar {
+            font-size: 0.97rem;
+            padding: 0.2rem 0.1rem;
+            gap: 0.2rem;
+            min-height: 0;
+        }
+        .lang-label {
+            font-size: 0.97rem;
+            margin: 0.2rem 0;
+            width: 100%;
+            flex-basis: 100%;
+            display: block;
+        }
+        .lang-select-bar button {
+            font-size: 0.97rem;
+            padding: 0.18rem 0.7rem;
+            min-width: 70px;
+            margin-bottom: 0.2rem;
+        }
+    }
+
+    /* ...existing styles... */
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <a href="/">
+            <img src="assets/logo.png" alt="StatusPay247 Logo" id="logo-img">
+          </a>
+        </div>
+        <div class="burger-menu" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul>
+          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html#what-is-statuspay">About</a></li>
+          <li><a href="index.html#how-it-works">How It Works</a></li>
+          <li><a href="index.html#why-choose-us">Why Choose Us</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="poster.html">Join as Poster</a></li>
+          <li><a href="advertiser-terms.html">Advertisers</a></li>
+          <li><button id="logoutBtn" class="logout-btn btn btn-secondary">
+              <i class="fas fa-sign-out-alt"></i>Logout
+            </button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- Language Selection Bar -->
+  <div class="lang-select-wrapper">
+    <div class="lang-select-bar">
+      <span class="lang-label">
+        Choose your language / നിങ്ങളുടെ ഭാഷ തിരഞ്ഞെടുക്കുക:
+      </span>
+      <button type="button" id="btn-en" class="active">English</button>
+      <button type="button" id="btn-ml">മലയാളം</button>
+    </div>
+  </div>
+
+  <!-- Main Dashboard Content -->
+  <main class="container">
+    <!-- Redesigned Onboarding Screen -->
+    <div id="onboardingScreen" style="display:none; text-align:center; padding:3rem;">
+      <div style="font-size:1.08rem;color:var(--text-light);margin-bottom:2rem;" data-translate="onboarding-instructions">
+        To join StatusPay247, please complete <b>all the steps below</b>:
+      </div>
+      <!-- Social Media Follow Card -->
+      <div style="background:var(--background-light);border-radius:14px;padding:2rem 1rem 1.5rem 1rem;max-width:500px;margin:0 auto 2rem auto;box-shadow:0 4px 16px rgba(0,0,0,0.07);">
+        <h2 style="color:var(--primary-color);margin-bottom:1.2rem;font-size:1.5rem;" data-translate="step1-title">
+          Step 1: Follow us on Social Media
+        </h2>
+        <div style="display:flex;justify-content:center;gap:2rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <a href="https://x.com/statuspay247" target="_blank" style="color:#000; margin:0 0.5em; font-size:2.5em;" aria-label="X.com">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://x.com/statuspay247" target="_blank" class="btn" style="background:#000;color:#fff;padding:0.5rem 1.2rem;font-size:1rem;border-radius:6px;margin-bottom:0.2rem;">
+              Follow
+            </a>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <a href="https://www.facebook.com/profile.php?id=61576782695560" target="_blank" style="color:#1877f3; margin:0 0.5em; font-size:2.5em;" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61576782695560" target="_blank" class="btn" style="background:#1877f3;color:#fff;padding:0.5rem 1.2rem;font-size:1rem;border-radius:6px;margin-bottom:0.2rem;">
+              Follow
+            </a>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <a href="https://www.instagram.com/statuspay247" target="_blank" style="color:#e4405f; margin:0 0.5em; font-size:2.5em;" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.instagram.com/statuspay247" target="_blank" class="btn" style="background:#e4405f;color:#fff;padding:0.5rem 1.2rem;font-size:1rem;border-radius:6px;margin-bottom:0.2rem;">
+              Follow
+            </a>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <a href="https://www.linkedin.com/company/statuspay247" target="_blank" style="color:#0077b5; margin:0 0.5em; font-size:2.5em;" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/statuspay247" target="_blank" class="btn" style="background:#0077b5;color:#fff;padding:0.5rem 1.2rem;font-size:1rem;border-radius:6px;margin-bottom:0.2rem;">
+              Follow
+            </a>
+          </div>
+        </div>
+        <div style="font-size:1rem;color:var(--text-light);margin-top:0.5rem;" data-translate="follow-note">
+          Please follow our official pages and keep a screenshot for verification.
+        </div>
+      </div>
+      <!-- Download Image & Copy Text Card -->
+      <div style="background:var(--background-light);border-radius:18px;padding:2.2rem 1.2rem 2rem 1.2rem;max-width:540px;margin:0 auto;box-shadow:0 6px 24px rgba(30,151,126,0.10);">
+        <h3 style="color:var(--primary-color);margin-bottom:1.3rem;font-size:1.25rem;letter-spacing:0.01em;" data-translate="step2-title">
+          <i class="fas fa-tasks" style="color:#1e977e;margin-right:0.5em;"></i>
+          Step 2: WhatsApp Status Task
+        </h3>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:1.5rem;">
+          <!-- Image with Download Button -->
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <img id="onboardingAdImage" src="assets/onboarding-ad.jpg" alt="Onboarding Ad" style="max-width:240px;border-radius:12px;box-shadow:0 2px 12px rgba(30,151,126,0.08);border:2px solid #e5e7eb;">
+            <a id="downloadAdImageBtn" href="assets/onboarding-ad.jpg" download="StatusPay247-Ad.jpg"
+               class="btn"
+               style="margin-top:0.8rem;background:#1e977e;color:#fff;padding:0.45rem 1.1rem;font-size:1rem;border-radius:7px;box-shadow:0 2px 8px rgba(30,151,126,0.10);display:flex;align-items:center;gap:0.5em;">
+              <i class="fas fa-download"></i> Download
+            </a>
+            <div style="font-size:0.93rem;color:var(--text-light);margin-top:0.7rem;text-align:center;" data-translate="download-note">
+              <i class="fas fa-info-circle" style="color:#1e977e;margin-right:0.3em;"></i>
+              Download and post this image to your WhatsApp status.
+            </div>
+          </div>
+          <!-- Text with Copy Button -->
+          <div style="width:100%;max-width:350px;display:flex;flex-direction:column;align-items:stretch;gap:0.5rem;">
+            <label for="onboardingAdText" style="font-weight:600;color:var(--secondary-color);margin-bottom:0.2rem;text-align:left;" data-translate="status-caption">
+              Status Caption (copy & paste)
+            </label>
+            <div style="display:flex;gap:0.5rem;">
+              <textarea id="onboardingAdText" readonly
+                style="flex:1;width:100%;min-height:110px;padding:0.85rem 1.1rem;border-radius:8px;border:1.5px solid var(--border-color);font-size:1.05rem;background:#f9fafb;color:var(--text-color);resize:none;box-shadow:0 1px 4px rgba(30,151,126,0.04);transition:border-color 0.2s;">
+Get paid for what you already do — *posting WhatsApp Status updates.*
+
+StatusPay247 connects real users with real advertisers.
+
+*No gimmicks, no false promises* — just simple earning from home.
+
+Register at StatusPay247.com
+and start your journey today.</textarea>
+              <button id="copyAdTextBtn" class="btn" title="Copy text"
+                style="align-self:flex-start;margin-top:0.2rem;background:#17314b;color:#fff;font-size:1.1rem;border-radius:7px;padding:0.7rem 1rem;min-width:44px;display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+            <div style="font-size:0.93rem;color:var(--text-light);margin-top:0.2rem;text-align:left;" data-translate="copy-note">
+              <i class="fas fa-info-circle" style="color:#1e977e;margin-right:0.3em;"></i>
+              Copy this caption and paste it with your status image.
+            </div>
+          </div>
+        </div>
+        <div style="font-size:1rem;color:var(--primary-color);margin-top:1.5rem;text-align:center;font-weight:600;" data-translate="post-note">
+          <i class="fas fa-check-circle" style="color:#1e977e;margin-right:0.4em;"></i>
+          Post both the image and caption to your WhatsApp status for approval.
+        </div>
+      </div>
+      <!-- Step 3: Upload Screenshot Card -->
+      <div style="background:var(--background-light);border-radius:18px;padding:2.2rem 1.2rem 2rem 1.2rem;max-width:540px;margin:2rem auto 0 auto;box-shadow:0 6px 24px rgba(30,151,126,0.10);">
+        <h3 style="color:var(--primary-color);margin-bottom:1.3rem;font-size:1.25rem;letter-spacing:0.01em;" data-translate="step3-title">
+          <i class="fas fa-upload" style="color:#1e977e;margin-right:0.5em;"></i>
+          Step 3: Upload Your Status Screenshot
+        </h3>
+        <div style="font-size:1rem;color:var(--text-light);margin-bottom:1.2rem;text-align:center;" data-translate="upload-instructions">
+          After 23 hours of posting, take a screenshot of your WhatsApp status showing the number of views your post received.<br>
+          <b>Upload that screenshot here for verification.</b>
+        </div>
+        <form id="onboardingScreenshotForm" style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
+          <input type="file" id="onboardingScreenshotFile" accept="image/jpeg,image/png,image/gif" required
+            style="padding:0.7rem 1rem;border-radius:7px;border:1.5px solid var(--border-color);background:#f9fafb;color:var(--text-color);font-size:1rem;width:100%;max-width:320px;">
+          <button type="submit" class="btn" style="background:#1e977e;color:#fff;font-size:1rem;border-radius:7px;padding:0.7rem 2.2rem;">
+            <i class="fas fa-upload"></i> Upload Screenshot
+          </button>
+          <div id="onboardingScreenshotStatus" style="font-size:0.97rem;color:var(--primary-color);margin-top:0.5rem;"></div>
+        </form>
+        <div style="font-size:0.93rem;color:var(--text-light);margin-top:1.2rem;text-align:center;" data-translate="upload-note">
+          <i class="fas fa-info-circle" style="color:#1e977e;margin-right:0.3em;"></i>
+          Make sure your screenshot clearly shows the number of views on your status after 23 hours.
+        </div>
+        <div style="font-size:0.97rem;color:var(--primary-color);margin-top:1.2rem;text-align:center;" data-translate="verification-note">
+          <i class="fas fa-clock" style="color:#1e977e;margin-right:0.3em;"></i>
+          <b>Note:</b> Screenshot verification is a manual process and may take up to <b>24 hours</b>. Once you upload your screenshot, just sit back and relax – our team will review and approve it as soon as possible!
+        </div>
+      </div>
+    </div>
+
+    <!-- Waiting Screen -->
+    <div id="waitingScreen" style="display:none; text-align:center; padding:3rem;">
+      <div style="font-size:2.5rem; color:var(--accent-color); margin-bottom:1rem;">
+        <i class="fas fa-hourglass-half"></i>
+      </div>
+      <h2>Verification Pending</h2>
+      <p style="font-size:1.1rem; color:var(--text-light);">
+        Your screenshot has been submitted. Our team will review it shortly.
+      </p>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading" class="loading-spinner">
+      <div class="spinner"></div>
+      <h3 id="loadingMessage">Loading your dashboard...</h3>
+      <p id="loadingSubMessage">Please wait while we fetch your latest data. This will take approximately 30 seconds.</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="error" class="error-container" style="display: none;">
+      <div class="error-icon">
+        <i class="fas fa-exclamation-triangle"></i>
+      </div>
+      <h3>Unable to load dashboard</h3>
+      <p>
+        ❌ Failed to load your dashboard data.<br>
+        <span id="errorDetails">Please try refreshing the page.</span>
+      </p>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div id="dashboardContent" style="display: none;">
+      <!-- Dashboard Grid -->
+      <div class="dashboard-grid">
+        <!-- Wallet Card -->
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div class="card-icon wallet-icon">
+              <i class="fas fa-wallet"></i>
+            </div>
+            <h3 class="card-title" data-translate="wallet-title">Your Wallet</h3>
+          </div>
+          
+          <div class="wallet-balance">
+            ₹<span id="balance">0</span>
+          </div>
+          
+          <div class="progress-container">
+            <div class="progress-bar" id="walletBar" style="width: 0%"></div>
+          </div>
+          <div class="progress-label" id="walletBarLabel">0% of ₹500 threshold</div>
+          
+          <div class="wallet-details">
+            <div class="wallet-detail">
+              <span class="wallet-detail-label" data-translate="total-earned">Total Earned</span>
+              <span class="wallet-detail-value">₹<span id="totalEarned">0</span></span>
+            </div>
+            <div class="wallet-detail">
+              <span class="wallet-detail-label" data-translate="paid-out">Paid Out</span>
+              <span class="wallet-detail-value">₹<span id="paid">0</span></span>
+            </div>
+          </div>
+          <!-- Withdraw Button with lock/unlock icon -->
+          <div style="text-align:center; margin-top:1.5rem;">
+            <button id="withdrawBtn" class="btn wallet-withdraw-btn" style="min-width:180px;" disabled>
+              <i id="withdrawLockIcon" class="fas fa-lock"></i>
+              Withdraw
+            </button>
+            <div class="withdraw-note" data-translate="threshold-note">
+              <i class="fas fa-info-circle"></i>
+              You can only withdraw your amount after meeting the ₹500 threshold.
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div class="card-icon profile-icon">
+              <i class="fas fa-user"></i>
+            </div>
+            <h3 class="card-title" data-translate="profile-title">Profile Information</h3>
+          </div>
+          
+          <!-- Added username in bold below the profile title -->
+          <div style="text-align: center; font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem;" id="userName">...</div>
+          
+          <div class="profile-info">
+            <div class="info-item">
+              <span class="info-label" data-translate="poster-id">Poster ID</span>
+              <span class="info-value" id="posterId">...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label" data-translate="phone-number">Phone Number</span>
+              <span class="info-value" id="phone">...</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Total Tasks Completed</span>
+              <span class="info-value" id="profileTasksCompleted">0</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Status</span>
+              <span class="info-value status-badge">Active</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Statistics Card (Replaced) -->
+        <div class="dashboard-card">
+          <div class="card-header">
+            <div class="card-icon stats-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3 class="card-title" data-translate="group-title">Join Official Posters Group</h3>
+          </div>
+          <div class="join-group-section" style="text-align:center; margin-bottom:1.2rem;">
+            <p style="margin-bottom:1.2rem; color:var(--text-light);">
+              Connect with other posters, get updates, and support in our official WhatsApp group.
+            </p>
+            <a href="https://chat.whatsapp.com/HEIxYpyYJQ9J0dydC7nSfH" target="_blank" class="btn join-group-btn">
+              <i class="fab fa-whatsapp"></i> Join Group
+            </a>
+          </div>
+          <div class="info-item" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+            <span class="info-label">Last Task</span>
+            <span class="info-value" id="lastTask">...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screenshot Upload Card -->
+      <div class="dashboard-card" style="max-width:600px; margin:2rem auto;">
+        <div class="card-header">
+          <div class="card-icon" style="background: var(--primary-color);">
+            <i class="fas fa-upload"></i>
+          </div>
+          <h3 class="card-title" data-translate="upload-title">Upload Task Screenshot</h3>
+        </div>
+        <div style="text-align:center;">
+          <!-- Removed manual phone input field -->
+          <input type="file" id="uploadFile" accept="image/*" style="margin-bottom:1rem;" required>
+          <br>
+          <button type="button" id="uploadBtn" class="btn" style="min-width:160px;">
+            <i class="fas fa-cloud-upload-alt"></i> Upload Screenshot
+          </button>
+          <div id="uploadStatusMessage" style="margin-top:1rem; font-size:0.98rem; color:var(--primary-color);"></div>
+          <div id="dashboardScreenshotLinks" style="font-size:0.93rem;color:var(--secondary-color);margin-top:1.2rem;text-align:left;max-width:420px;word-break:break-all;"></div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <a href="https://wa.me/919744483058" target="_blank" class="action-btn" data-translate="contact-support">
+          <i class="fab fa-whatsapp"></i>
+          Contact Support
+        </a>
+        <a href="terms-and-conditions-for-posters.html" target="_blank" class="action-btn" data-translate="view-terms">
+          <i class="fas fa-file-contract"></i>
+          View Terms
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="margin-top: 4rem;">
+        <div class="copyright" style="background-color:#1F2937; color:white; padding:0;">
+            <p style="margin-top:1.5rem;">&copy; 2025 StatusPay247. All rights reserved.</p>
+            <div class="footer-social" style="margin:1rem 0 0.5rem 0;">
+                <a href="https://x.com/statuspay247" target="_blank" style="color:#fff; margin:0 0.5em; font-size:1.3em;" aria-label="X.com">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61576782695560" target="_blank" style="color:#fff; margin:0 0.5em; font-size:1.3em;" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/statuspay247" target="_blank" style="color:#fff; margin:0 0.5em; font-size:1.3em;" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/company/statuspay247" target="_blank" style="color:#fff; margin:0 0.5em; font-size:1.3em;" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <p class="disclaimer" style="color:#9CA3AF;">WhatsApp® is a registered trademark of Meta Platforms, Inc. We are not affiliated with or endorsed by WhatsApp® or Meta Platforms, Inc. The services we provide involve direct WhatsApp status marketing using our network of users, and the use of the WhatsApp® logo or name is strictly for illustrative purposes. All rights to WhatsApp® remain the property of Meta Platforms, Inc.</p>
+        </div>
+    </footer>
+
+  <script>
+    // Language switching logic
+    function setLanguage(lang) {
+      // Toggle active button state
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ml').classList.toggle('active', lang === 'ml');
+      
+      // Save preference to localStorage
+      localStorage.setItem('statuspay247_lang', lang);
+      
+      // Update all elements with data-translate attribute
+      document.querySelectorAll('[data-translate]').forEach(el => {
+        const key = el.getAttribute('data-translate');
+        const translations = {
+          'wallet-title': { en: 'Your Wallet', ml: 'നിങ്ങളുടെ വോലറ്റ്' },
+          'total-earned': { en: 'Total Earned', ml: 'ആകെ നേടിയത്' },
+          'paid-out': { en: 'Paid Out', ml: 'കൈപ്പറ്റിയത്' },
+          'threshold-note': { en: 'You can only withdraw your amount after meeting the ₹500 threshold.', 
+                          ml: '₹500 ആകുമ്പോൾ മാത്രമേ പണം പിൻവലിക്കാൻ സാധിക്കൂ.' },
+          'profile-title': { en: 'Profile Information', ml: 'പ്രൊഫൈൽ വിവരങ്ങൾ' },
+          'poster-id': { en: 'Poster ID', ml: 'പോസ്റ്റർ നമ്പർ' },
+          'phone-number': { en: 'Phone Number', ml: 'ഫോൺ നമ്പർ' },
+          'group-title': { en: 'Join Official Posters Group', 
+                        ml: 'ഔദ്യോഗിക വാട്സ്ആപ്പ് ഗ്രൂപ്പിൽ ചേരൂ' },
+          'upload-title': { en: 'Upload Task Screenshot', 
+                         ml: 'സ്‌ക്രീൻഷോട്ട് അപ്‌ലോഡ് ചെയ്യൂ' },
+          'contact-support': { en: 'Contact Support', 
+                           ml: 'സഹായത്തിന് ബന്ധപ്പെടൂ' },
+          'view-terms': { en: 'View Terms', ml: 'നിബന്ധനകൾ' },
+          'onboarding-title': { en: 'Complete Onboarding', 
+                            ml: 'രജിസ്ട്രേഷൻ പൂർത്തിയാക്കൂ' },
+          'onboarding-instructions': { 
+            en: 'Please complete onboarding by uploading your screenshot.',
+            ml: 'നിങ്ങളുടെ വാട്സ്ആപ്പ് സ്റ്റാറ്റസിന്റെ സ്‌ക്രീൻഷോട്ട് അപ്‌ലോഡ് ചെയ്ത് രജിസ്ട്രേഷൻ പൂർത്തിയാക്കൂ.'
+          },
+          'step1-title': { 
+            en: 'Step 1: Follow us on Social Media',
+            ml: 'ആദ്യപടി: ഞങ്ങളുടെ സോഷ്യൽ മീഡിയ അക്കൗണ്ടുകൾ ഫോളോ ചെയ്യൂ'
+          },
+          'step2-title': { 
+            en: 'Step 2: WhatsApp Status Task',
+            ml: 'രണ്ടാം പടി: വാട്സ്ആപ്പ് സ്റ്റാറ്റസ് പോസ്റ്റ് ചെയ്യൂ'
+          },
+          'step3-title': { 
+            en: 'Step 3: Upload Your Status Screenshot',
+            ml: 'മൂന്നാം പടി: സ്റ്റാറ്റസിന്റെ സ്‌ക്രീൻഷോട്ട് അപ്‌ലോഡ് ചെയ്യൂ'
+          },
+          'status-caption': { 
+            en: 'Status Caption (copy & paste)',
+            ml: 'സ്റ്റാറ്റസിനൊപ്പം ചേർക്കേണ്ട വാചകം (കോപ്പി ചെയ്യൂ)'
+          },
+          'upload-instructions': { 
+            en: 'After 23 hours of posting, take a screenshot of your WhatsApp status showing the number of views your post received.',
+            ml: 'സ്റ്റാറ്റസ് പോസ്റ്റ് ചെയ്ത് 23 മണിക്കൂർ കഴിഞ്ഞ്, എത്ര പേർ കണ്ടു എന്ന് കാണിക്കുന്ന സ്‌ക്രീൻഷോട്ട് എടുക്കൂ.'
+          },
+          'upload-note': { 
+            en: 'Make sure your screenshot clearly shows the number of views on your status after 23 hours.',
+            ml: 'സ്റ്റാറ്റസ് എത്ര പേർ കണ്ടു എന്നത് സ്‌ക്രീൻഷോട്ടിൽ വ്യക്തമായി കാണണം.'
+          },
+          'follow-note': { 
+            en: 'Please follow our official pages and keep a screenshot for verification.',
+            ml: 'ദയവായി ഞങ്ങളുടെ ഔദ്യോഗിക പേജുകൾ ഫോളോ ചെയ്ത് അതിന്റെ സ്‌ക്രീൻഷോട്ട് എടുത്തു വയ്ക്കൂ.'
+          },
+          'download-note': { 
+            en: 'Download and post this image to your WhatsApp status.',
+            ml: 'ഈ ചിത്രം ഡൗൺലോഡ് ചെയ്ത് നിങ്ങളുടെ വാട്സ്ആപ്പ് സ്റ്റാറ്റസിൽ പോസ്റ്റ് ചെയ്യൂ.'
+          },
+          'copy-note': { 
+            en: 'Copy this caption and paste it with your status image.',
+            ml: 'മുകളിലെ വാചകം കോപ്പി ചെയ്ത് സ്റ്റാറ്റസിനൊപ്പം ചേർക്കൂ.'
+          },
+          'post-note': { 
+            en: 'Post both the image and caption to your WhatsApp status for approval.',
+            ml: 'ചിത്രവും വാചകവും നിങ്ങളുടെ വാട്സ്ആപ്പ് സ്റ്റാറ്റസിൽ പോസ്റ്റ് ചെയ്യൂ.'
+          },
+          'verification-note': { 
+            en: 'Note: Screenshot verification is a manual process and may take up to 24 hours. Once you upload your screenshot, just sit back and relax – our team will review and approve it as soon as possible!',
+            ml: 'കുറിപ്പ്: സ്‌ക്രീൻഷോട്ട് പരിശോധിക്കാൻ 24 മണിക്കൂർ വരെ എടുത്തേക്കാം. നിങ്ങൾ അപ്‌ലോഡ് ചെയ്തുകഴിഞ്ഞാൽ, ഞങ്ങളുടെ ടീം എത്രയും പെട്ടെന്ന് അത് പരിശോധിച്ച് അംഗീകരിക്കുന്നതാണ്!'
+          }
+        };
+        
+        if (translations[key]) {
+          el.textContent = translations[key][lang];
+        }
+      });
+    }
+
+    // Initialize language on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedLang = localStorage.getItem('statuspay247_lang') || 'en';
+      setLanguage(savedLang);
+      
+      // Add event listeners to language buttons
+      document.getElementById('btn-en').addEventListener('click', function() {
+        setLanguage('en');
+      });
+      
+      document.getElementById('btn-ml').addEventListener('click', function() {
+        setLanguage('ml');
+      });
+    });
+
+    // Logout button logic
+    document.getElementById('logoutBtn').onclick = function() {
+      localStorage.removeItem('user');
+      localStorage.removeItem('loggedIn');
+      localStorage.removeItem('loginTime');
+      localStorage.removeItem('userPhone');
+      window.location.href = 'login.html';
+    };
+
+    function showOnboardingScreen(message) {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("dashboardContent").style.display = "none";
+      document.getElementById("error").style.display = "none";
+      let onboarding = document.getElementById("onboardingScreen");
+      var user = JSON.parse(localStorage.getItem("user"));
+      var name = user && user.name ? user.name : "...";
+      var onboardingUserName = document.getElementById("onboardingUserName");
+      if (onboardingUserName) onboardingUserName.textContent = name;
+      if (!onboarding) {
+        onboarding = document.createElement("div");
+        onboarding.id = "onboardingScreen";
+        onboarding.style.textAlign = "center";
+        onboarding.style.padding = "3rem";
+        onboarding.innerHTML = `
+          <div style="font-size:2.5rem; color:var(--primary-color); margin-bottom:1rem;">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <h2>Complete Onboarding</h2>
+          <p style="font-size:1.1rem; color:var(--text-light); margin-bottom:2rem;">${message || "Please complete onboarding by uploading your screenshot."}</p>
+          <a href="#uploadSection" class="btn" style="font-size:1.1rem;">
+            <i class="fas fa-upload"></i> Upload Screenshot
+          </a>
+        `;
+        document.querySelector("main.container").prepend(onboarding);
+      } else {
+        onboarding.style.display = "block";
+      }
+      onboarding.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function hideSpecialScreens() {
+      let onboarding = document.getElementById("onboardingScreen");
+      if (onboarding) onboarding.style.display = "none";
+      let waiting = document.getElementById("waitingScreen");
+      if (waiting) waiting.style.display = "none";
+    }
+
+    function checkOnboardingStatus(phone, callback) {
+      const cbName = 'onboardingStatusCb_' + Date.now();
+      window[cbName] = function(result) {
+        callback(result);
+        // Remove script tag after callback
+        const script = document.getElementById(cbName);
+        if (script) script.remove();
+        delete window[cbName];
+      };
+      // Use a variable for the script URL
+      const scriptURL = "https://script.google.com/macros/s/AKfycbzBHaOZQjCMHy94swo86M_Hb_mFodqt-c5hepUy89RglCGeUbbv_5yf1E8tf3Ebhycd/exec";
+      const url = `${scriptURL}?action=onboardingStatus&phone=${encodeURIComponent(phone)}&callback=${cbName}`;
+      const script = document.createElement('script');
+      script.src = url;
+      script.id = cbName;
+      document.head.appendChild(script);
+    }
+
+    // New: Step-by-step dashboard loader
+    async function loadDashboardSequence(token) {
+      hideSpecialScreens();
+      const loadingDiv = document.getElementById("loading");
+      if (loadingDiv) {
+        loadingDiv.style.display = "block";
+        const user = JSON.parse(localStorage.getItem("user"));
+        const userName = user && user.name ? user.name : "User";
+        const h3 = loadingDiv.querySelector("#loadingMessage");
+        const p = loadingDiv.querySelector("#loadingSubMessage");
+        if (h3) h3.textContent = `Loading your dashboard, ${userName}...`;
+        if (p) p.textContent = "Please wait while we fetch your latest data. This will take approximately 30 seconds.";
+      }
+
+      // Verify token
+      let phone = null;
+      try {
+        const cbName = "verifyTokenCb_" + Date.now();
+        // Use a variable for the script URL
+        const verifyScriptURL = "https://script.google.com/macros/s/AKfycbzBHaOZQjCMHy94swo86M_Hb_mFodqt-c5hepUy89RglCGeUbbv_5yf1E8tf3Ebhycd/exec";
+        const verifyUrl = `${verifyScriptURL}?action=verifyToken&token=${encodeURIComponent(token)}&callback=${cbName}`;
+        phone = await new Promise((resolve, reject) => {
+          window[cbName] = function(result) {
+            if (result === "EXPIRED" || (result && !result.success)) {
+              // Redirect to login page if token is expired or invalid
+              window.location.href = "login.html";
+              return;
+            }
+            if (result && result.success && result.phone) {
+              resolve(result.phone);
+            } else {
+              reject(result && result.message ? result.message : "Token verification failed");
+            }
+            delete window[cbName];
+            const script = document.getElementById(cbName);
+            if (script) script.remove();
+          };
+          const script = document.createElement("script");
+          script.src = verifyUrl;
+          script.id = cbName;
+          document.body.appendChild(script);
+        });
+      } catch (err) {
+        // Redirect to login page if an error occurs
+        window.location.href = "login.html";
+        return;
+      }
+
+      // 2. Check eligibility
+      let eligible = false;
+      try {
+        // Use a variable for the script URL
+        const eligibleScriptURL = "https://script.google.com/macros/s/AKfycbzBHaOZQjCMHy94swo86M_Hb_mFodqt-c5hepUy89RglCGeUbbv_5yf1E8tf3Ebhycd/exec";
+        const eligibleUrl = `${eligibleScriptURL}?action=checkEligibility&phone=${encodeURIComponent(phone)}&callback=checkEligibleCb_${Date.now()}`;
+        eligible = await new Promise((resolve, reject) => {
+          const cbName = "checkEligibleCb_" + Date.now();
+          window[cbName] = function(result) {
+            if (result && result.success) {
+              resolve(result.eligible === true);
+            } else {
+              reject(result && result.message ? result.message : "Eligibility check failed");
+            }
+            delete window[cbName];
+            const script = document.getElementById(cbName);
+            if (script) script.remove();
+          };
+          const script = document.createElement("script");
+          script.src = eligibleUrl.replace(/callback=[^&]+/, "callback=" + cbName);
+          script.id = cbName;
+          document.body.appendChild(script);
+        });
+      } catch (err) {
+        if (loadingDiv) loadingDiv.style.display = "none";
+        document.getElementById("dashboardContent").style.display = "none";
+        document.getElementById("error").style.display = "block";
+        const errorP = document.querySelector("#error p");
+        if (errorP) errorP.textContent = "Failed to check eligibility. Please try again.";
+        return;
+      }
+
+      // 3. Get dashboard data or show onboarding
+      if (!eligible) {
+        showOnboardingScreen("Please complete onboarding by uploading your screenshot.");
+        if (loadingDiv) loadingDiv.style.display = "none";
+        return;
+      }
+
+      try {
+        const dashboardScriptURL = "https://script.google.com/macros/s/AKfycbzBHaOZQjCMHy94swo86M_Hb_mFodqt-c5hepUy89RglCGeUbbv_5yf1E8tf3Ebhycd/exec";
+        const dashboardUrl = `${dashboardScriptURL}?action=getDashboardData&phone=${encodeURIComponent(phone)}&callback=getDashboardCb_${Date.now()}`;
+        await new Promise((resolve, reject) => {
+          const cbName = "getDashboardCb_" + Date.now();
+          window[cbName] = function(result) {
+            try {
+              if (!result.success || !result.data) throw new Error(result.message || "Unknown error");
+              const data = result.data;
+              // Set user's name from localStorage in the welcome header
+              const user = JSON.parse(localStorage.getItem("user"));
+              const setText = (id, value) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = value;
+              };
+              setText("userName", (user && user.name) ? user.name : "...");
+              // If dashboard is empty (no earnings yet), show a friendly message in the dashboard
+              if (
+                (!data.name || data.name.trim() === "") &&
+                (!data.totalEarned || data.totalEarned === "0") &&
+                (!data.balance || data.balance === "0")
+              ) {
+                document.getElementById("dashboardContent").style.display = "block";
+                document.getElementById("loading").style.display = "none";
+                const dashboardWelcome = document.querySelector(".dashboard-welcome p");
+                if (dashboardWelcome) {
+                  dashboardWelcome.textContent = result.message || "No earnings yet. Complete your first task to see your dashboard.";
+                }
+                setText("balance", "0.00");
+                setText("totalEarned", "0.00");
+                setText("paid", "0.00");
+                setText("posterId", "...");
+                setText("phone", data.phone || "...");
+                setText("profileTasksCompleted", "0");
+                setText("lastTask", "...");
+                // Update wallet bar
+                const walletBar = document.getElementById("walletBar");
+                const walletBarLabel = document.getElementById("walletBarLabel");
+                if (walletBar && walletBarLabel) {
+                  walletBar.style.width = "0%";
+                  walletBarLabel.textContent = "0% of ₹500 threshold";
+                }
+                resolve();
+                return;
+              }
+              // Defensive: Only update elements if they exist
+              setText("balance", data.balance !== undefined ? Number(data.balance).toFixed(2) : "0.00");
+              setText("totalEarned", data.totalEarned !== undefined ? Number(data.totalEarned).toFixed(2) : "0.00");
+              setText("paid", data.paid !== undefined ? Number(data.paid).toFixed(2) : "0.00");
+              setText("posterId", data.posterId || "...");
+              setText("phone", data.phone || "...");
+              setText("profileTasksCompleted", data.tasksCompleted !== undefined ? data.tasksCompleted : 0);
+              setText("lastTask", data.lastTask || "...");
+              // Update wallet bar
+              const walletBar = document.getElementById("walletBar");
+              const walletBarLabel = document.getElementById("walletBarLabel");
+              if (walletBar && walletBarLabel) {
+                const threshold = 500;
+                const progress = Math.min((Number(data.balance) / threshold) * 100, 100);
+                walletBar.style.width = progress + "%";
+                walletBarLabel.textContent = `${progress.toFixed(0)}% of ₹${threshold} threshold`;
+              }
+              document.getElementById("dashboardContent").style.display = "block";
+              document.getElementById("loading").style.display = "none";
+              resolve();
+            } catch (error) {
+              document.getElementById("dashboardContent").style.display = "none";
+              document.getElementById("loading").style.display = "none";
+              document.getElementById("error").style.display = "block";
+              var errorP = document.querySelector("#error p");
+              if (errorP) errorP.textContent = "Failed to load dashboard data. Please try again later.";
+              reject(error);
+            }
+        delete window[cbName];
+        const script = document.getElementById(cbName);
+        if (script) script.remove();
+      };
+      const script = document.createElement("script");
+      script.src = dashboardUrl.replace(/callback=[^&]+/, "callback=" + cbName);
+      script.id = cbName;
+      document.body.appendChild(script);
+    });
+  } catch (err) {
+    document.getElementById("dashboardContent").style.display = "none";
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("error").style.display = "block";
+    var errorP = document.querySelector("#error p");
+    if (errorP) errorP.textContent = "Failed to load dashboard data. Please try again later.";
+    return;
+  }
+}
+
+// Initial load: use the new sequence loader
+document.addEventListener("DOMContentLoaded", function() {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  // Always set the user's name in the welcome header immediately
+  const userNameEl = document.getElementById("userName");
+  if (userNameEl && user && user.name) {
+    userNameEl.textContent = user.name;
+  }
+
+  if (user && user.token) {
+    loadDashboardSequence(user.token);
+  } else {
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("error").style.display = "block";
+    var errorP = document.querySelector("#error p");
+    if (errorP) {
+      errorP.textContent = "Failed to load dashboard data. Please try again later.";
+    }
+  }
+});
+
+// Onboarding copy button logic
+document.addEventListener("DOMContentLoaded", function() {
+  var copyBtn = document.getElementById("copyAdTextBtn");
+  var adText = document.getElementById("onboardingAdText");
+  if (copyBtn && adText) {
+    copyBtn.onclick = function() {
+      adText.select();
+      adText.setSelectionRange(0, 99999); // For mobile
+      document.execCommand("copy");
+      copyBtn.textContent = "Copied!";
+      setTimeout(function() {
+        copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Text';
+      }, 1500);
+    };
+  }
+});
+
+// Updated onboarding screenshot upload logic (using iframe like dashboard)
+document.addEventListener("DOMContentLoaded", function() {
+  var form = document.getElementById("onboardingScreenshotForm");
+  var fileInput = document.getElementById("onboardingScreenshotFile");
+  var statusDiv = document.getElementById("onboardingScreenshotStatus");
+
+  if (form && fileInput && statusDiv) {
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      statusDiv.style.color = "var(--primary-color)";
+      statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Reading file...';
+
+      if (!fileInput.files.length) {
+        statusDiv.textContent = "Please select a screenshot to upload.";
+        statusDiv.style.color = "#e74c3c";
+        return;
+      }
+      var file = fileInput.files[0];
+      var allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+      if (allowedTypes.indexOf(file.type) === -1) {
+        statusDiv.textContent = "Only JPG, PNG, or GIF images are allowed.";
+        statusDiv.style.color = "#e74c3c";
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        statusDiv.textContent = "File size exceeds 5MB limit.";
+        statusDiv.style.color = "#e74c3c";
+        return;
+      }
+
+      // Always get phone from localStorage at submit time
+      var user = null;
+      try {
+        user = JSON.parse(localStorage.getItem("user"));
+      } catch (err) {
+        user = null;
+      }
+      var phone = user && user.phone ? user.phone : "";
+      if (!phone) {
+        statusDiv.textContent = "Could not determine your phone number. Please log in again.";
+        statusDiv.style.color = "#e74c3c";
+        return;
+      }
+
+      try {
+        // Use the same handleScreenshotUpload function as dashboard
+        await handleScreenshotUpload(file, phone, statusDiv);
+      } catch (err) {
+        // Error already handled in handleScreenshotUpload
+      }
+    });
+  }
+});
+
+function readFileAsBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = () => reject(new Error('Failed to read file'));
+    reader.readAsDataURL(file);
+  });
+}
+
+function getTimestampString() {
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const dd = String(now.getDate()).padStart(2, '0');
+  const hh = String(now.getHours()).padStart(2, '0');
+  const min = String(now.getMinutes()).padStart(2, '0');
+  const ss = String(now.getSeconds()).padStart(2, '0');
+  return `${yyyy}${mm}${dd}T${hh}${min}${ss}`;
+}
+
+// Screenshot upload handler
+async function handleScreenshotUpload(file, phone, statusElement) {
+  try {
+    if (!file) throw new Error("Please select a screenshot to upload.");
+    if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
+      throw new Error("Only JPG, PNG, or GIF images are allowed.");
+    }
+    if (file.size > 5 * 1024 * 1024) throw new Error("File size exceeds 5MB limit.");
+
+    statusElement.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+    statusElement.style.color = "var(--primary-color)";
+
+    const base64Data = await readFileAsBase64(file);
+    const base64Content = base64Data.split(',')[1];
+    const timestamp = getTimestampString();
+    const filename = `${phone.slice(-10)}_${timestamp}.${file.name.split('.').pop() || 'png'}`;
+
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxp23JcJ69LiuJ0ks0M7Z0YLU-OPDpfVWQqDwLCtN2AjDCWhx_mwP52-GnOSfpq764SPQ/exec';
+
+    const response = await fetch(SCRIPT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: new URLSearchParams({
+        phone: phone,
+        base64Data: base64Content,
+        contentType: file.type,
+        filename: filename
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      statusElement.innerHTML = '<i class="fas fa-check-circle"></i> Screenshot uploaded successfully!';
+      statusElement.style.color = "var(--primary-color)";
+    } else {
+      throw new Error(result.message || "Upload failed");
+    }
+
+    return result;
+  } catch (err) {
+    statusElement.textContent = err.message || "Upload failed";
+    statusElement.style.color = "#e74c3c";
+    throw err;
+  }
+}
+
+// Add event listener for dashboard upload button
+document.addEventListener("DOMContentLoaded", function() {
+  const uploadBtn = document.getElementById("uploadBtn");
+  const fileInput = document.getElementById("uploadFile");
+  const statusDiv = document.getElementById("uploadStatusMessage");
+
+  if (uploadBtn && fileInput) {
+    uploadBtn.addEventListener("click", async function() {
+      if (!fileInput.files.length) {
+        if (statusDiv) {
+          statusDiv.textContent = "Please select a file first";
+          statusDiv.style.color = "#e74c3c";
+        }
+        return;
+      }
+
+      // Get user phone from localStorage
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      const phone = user.phone;
+
+      if (!phone) {
+        if (statusDiv) {
+          statusDiv.textContent = "Please log in again";
+          statusDiv.style.color = "#e74c3c";
+        }
+        return;
+      }
+
+      try {
+        await handleScreenshotUpload(fileInput.files[0], phone, statusDiv);
+      } catch (err) {
+        if (statusDiv) {
+          statusDiv.textContent = err.message || "Upload failed";
+          statusDiv.style.color = "#e74c3c";
+        }
+      }
+    });
+  }
+});
+
+  </script>
+</body>
+
+</html>
