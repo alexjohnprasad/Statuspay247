@@ -51,19 +51,65 @@
         <section id="hero" style="background: white; color: var(--text-color); padding: 100px 0 70px; position: relative; overflow: hidden;">
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E'); opacity: 0.4;"></div>
             <div class="container">
-                <div class="hero-content" style="position: relative; z-index: 2; text-align: center;">
-                    <div class="hero-text" style="max-width: 800px; margin: 0 auto;">
+                <div class="hero-flex-container">
+                    <div class="hero-text-content">
                         <h1 data-translate="hero_title" style="font-size: 2.8rem; margin-bottom: 20px; font-weight: 800; color: var(--text-color);">Reach Thousands on WhatsApp — Even If You Don't Have an Ad Yet.</h1>
                         <p data-translate="hero_desc" style="font-size: 1.2rem; margin-bottom: 30px; color: var(--text-light);">Promote your business through verified WhatsApp users who post your ads as their status. Need help with your creatives? We design, build, and market it all for you.</p>
-                        <div class="hero-buttons" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                        <div class="hero-buttons" style="display: flex; flex-wrap: wrap; gap: 15px;">
                             <a href="ad-submission.html" class="btn" data-translate="start_advertising" style="background-color: var(--primary-color); color: white; font-weight: 700; padding: 14px 28px; border-radius: 8px;">Start Advertising Now</a>
                             <a href="#contact" class="btn" data-translate="need_design" style="background: var(--secondary-color); color: white; font-weight: 700; padding: 14px 28px; border-radius: 8px;">Need Ad Design Help?</a>
                         </div>
                         <p style="font-size: 0.95rem; margin-top: 25px; color: var(--text-light);"><i class="fas fa-check-circle" style="color: var(--primary-color);"></i> <span data-translate="real_users">No bots. No influencers. Just real users with real views.</span></p>
                     </div>
+                    <div class="hero-image-content">
+                        <img src="assets/MARKETING HERO.png" alt="WhatsApp Status Marketing" class="hero-image">
+                    </div>
                 </div>
             </div>
         </section>
+
+        <style>
+            .hero-flex-container {
+                display: flex;
+                align-items: center;
+                gap: 40px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .hero-text-content {
+                flex: 1;
+                min-width: 300px;
+            }
+
+            .hero-image-content {
+                flex: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .hero-image {
+                max-width: 100%;
+                height: auto;
+            }
+
+            @media (max-width: 768px) {
+                .hero-flex-container {
+                    flex-direction: column;
+                    text-align: center;
+                }
+
+                .hero-buttons {
+                    justify-content: center;
+                }
+
+                .hero-image-content {
+                    order: -1;
+                    margin-bottom: 30px;
+                }
+            }
+        </style>
 
         <!-- Process Section -->
         <section id="process" class="section-light">
@@ -509,5 +555,7 @@
             }
         }
     </style>
+</body>
+</html>
 </body>
 </html>
